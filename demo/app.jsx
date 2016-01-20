@@ -9,8 +9,8 @@ class App extends React.Component {
   render() {
     return (
       <StyleRoot className="demo">
-        <Grid defaultCells={{width: 1 / 3}} style={{height: '500px'}}>
-          <Cell alignment={{horizontal: 'right', vertical: 'bottom'}}>
+        <Grid style={{height: '500px'}}>
+          <Cell>
             <span>Oy Oy Oy</span>
           </Cell>
           <Cell>
