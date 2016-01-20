@@ -1,14 +1,16 @@
 /* global document:false */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Radium, { StyleRoot } from 'radium';
 import { Grid, Cell } from '../src/index';
 
+@Radium
 class App extends React.Component {
   render() {
     return (
-      <div className="demo">
-        <Grid defaultCells={{width: 1 / 3}}>
-          <Cell alignment={{horizontal: 'center', vertical: 'bottom'}}>
+      <StyleRoot className="demo">
+        <Grid defaultCells={{width: 1 / 3}} style={{height: '500px'}}>
+          <Cell alignment={{horizontal: 'right', vertical: 'bottom'}}>
             <span>Oy Oy Oy</span>
           </Cell>
           <Cell>
@@ -18,7 +20,7 @@ class App extends React.Component {
             <span>Oy Oy Oy</span>
           </Cell>
         </Grid>
-      </div>
+      </StyleRoot>
     );
   }
 }
