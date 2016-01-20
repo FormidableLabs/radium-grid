@@ -1,81 +1,28 @@
-import React, { Component, Children, PropTypes } from 'react';
+import React, { Children, PropTypes } from 'react';
+import Radium from 'radium';
 
-class Grid extends Component {
-  constructor(props) {
-    super(props);
+const Grid = Radium(props => {
+  const styles = {
+    ...props.style,
+    display: 'flex',
+    flexDirection: 'row'
+  };
 
-    this.queryCache = Object.keys(props.breakpoints).map(key => {
-      return {
-        name: key,
-        queryList: window.matchMedia(
-          props.breakpoints[key].mediaQuery
-        )
-      };
-    });
-
-    const currentBreakpoint = this.queryCache.find(
-      query => query.queryList.matches
-    );
-
-    if (currentBreakpoint && currentBreakpoint.name) {
-      this.state = { breakpoint: currentBreakpoint.name };
-    } else {
-      this.state = { breakpoint: 'small'};
+  const childrenWithProps = Children.map(
+    props.children, child => {
+      return React.cloneElement(child, {
+        breakpoints: props.breakpoints,
+        defaultCells: props.defaultCells
+      });
     }
-  }
+  );
 
-  componentDidMount() {
-    for (const query of this.queryCache) {
-      query.queryList.addListener(
-        this.breakpointDidChange.bind(this)
-      );
-      this.breakpointDidChange.bind(this, query);
-    }
-  }
-
-  componentWillUnmount() {
-    for (const query of this.queryCache) {
-      query.queryList.removeListener(this.breakpointDidChange);
-    }
-  }
-
-  breakpointDidChange(mediaQuery) {
-    if (mediaQuery.matches) {
-      const matchingBreakpoint = this.queryCache.find(
-        query => query.queryList.media === mediaQuery.media
-      );
-
-      if (matchingBreakpoint) {
-        this.setState({
-          breakpoint: matchingBreakpoint.name
-        });
-      }
-    }
-  }
-
-  render() {
-    const styles = {
-      display: 'flex',
-      flexDirection: 'row'
-    };
-
-    const childrenWithProps = Children.map(
-      this.props.children, child => {
-        return React.cloneElement(child, {
-          breakpoint: this.state.breakpoint,
-          breakpoints: this.props.breakpoints,
-          defaultCells: this.props.defaultCells
-        });
-      }
-    );
-
-    return (
-      <div style={styles}>
-        {childrenWithProps}
-      </div>
-    );
-  }
-}
+  return (
+    <div style={styles}>
+      {childrenWithProps}
+    </div>
+  );
+});
 
 const cellShape = PropTypes.shape({
   width: PropTypes.number,
@@ -104,16 +51,16 @@ Grid.propTypes = {
 Grid.defaultProps = {
   breakpoints: {
     small: {
-      mediaQuery: '(max-width: 640px)'
+      mediaQuery: '@media only screen and (max-width: 640px)'
     },
     medium: {
-      mediaQuery: '(min-width: 641px) and (max-width: 1024px)'
+      mediaQuery: '@media only screen and (min-width: 641px) and (max-width: 1024px)'
     },
     large: {
-      mediaQuery: '(min-width: 1025px) and (max-width: 1440px)'
+      mediaQuery: '@media only screen and (min-width: 1025px) and (max-width: 1440px)'
     },
     xlarge: {
-      mediaQuery: '(min-width: 1441px)'
+      mediaQuery: '@media only screen and (min-width: 1441px)'
     }
   },
   defaultCells: {
