@@ -68,7 +68,7 @@ const resolveCellStyles = props => {
     return {
       ...acc,
       [mediaQuery]: {
-        flexBasis: `${cellConfig.width * 100}%`,
+        flexBasis: `calc(${cellConfig.width * 100}% - ${props.gutter})`,
         alignSelf: alignmentMap.vertical[
           cellConfig.verticalAlign
         ],
@@ -80,7 +80,7 @@ const resolveCellStyles = props => {
     };
   }, {
     display: 'flex',
-    ...props.styles
+    ...props.style
   });
 };
 

@@ -7,12 +7,14 @@ const Grid = Radium(props => {
     ...props.style,
     display: 'flex',
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
   };
 
+  const childProps = omit(props, ['children', 'style']);
   const childrenWithProps = Children.map(
     props.children, child => {
-      return React.cloneElement(child, omit(props, 'children'));
+      return React.cloneElement(child, childProps);
     }
   );
 
@@ -50,7 +52,8 @@ Grid.propTypes = {
     large: PropTypes.string,
     xlarge: PropTypes.string
   }),
-  gutter: PropTypes.number
+
+  gutter: PropTypes.string
 };
 
 Grid.defaultProps = {
@@ -65,7 +68,7 @@ Grid.defaultProps = {
     xlarge: '@media only screen and (min-width: 1441px)'
   },
 
-  gutter: 24
+  gutter: '24px'
 };
 
 export default Grid;
