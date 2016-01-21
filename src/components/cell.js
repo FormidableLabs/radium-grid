@@ -1,11 +1,9 @@
 import React, { PropTypes } from 'react';
 import Radium from 'radium';
 import resolveCellStyles from './util/resolve-cell-styles';
-import omit from 'lodash.omit';
 
 const Cell = Radium(props => {
   const styles = resolveCellStyles(props);
-  console.log(styles);
 
   return (
     <div style={styles}>
