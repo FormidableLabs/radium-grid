@@ -6,7 +6,8 @@ const Grid = Radium(props => {
   const styles = {
     ...props.style,
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   };
 
   const childrenWithProps = Children.map(
