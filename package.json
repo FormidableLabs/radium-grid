@@ -21,6 +21,7 @@
   "dependencies": {
     "builder": "~2.4.0",
     "builder-react-component": "^0.1.2",
+    "lodash.merge": "^4.0.1",
     "lodash.omit": "^4.0.1",
     "radium": "^0.16.2"
   },
