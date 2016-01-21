@@ -10,7 +10,7 @@ const resolveCellStyles = props => {
     },
     vertical: {
       top: 'flex-start',
-      center: 'center',
+      middle: 'center',
       bottom: 'flex-end'
     }
   };
@@ -23,7 +23,7 @@ const resolveCellStyles = props => {
 
   const cellDefault = {
     width: props.width,
-    horizontalAlign: props.horizontalAlign,
+    horizontalAlign: props.align,
     verticalAlign: props.verticalAlign
   };
 
