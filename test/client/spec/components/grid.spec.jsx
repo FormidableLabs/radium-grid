@@ -263,7 +263,7 @@ describe('components/grid', () => {
     }
   });
 
-  it('can resolve individual cell breakpoint sizes without conflict', () => {
+  it('should resolve individual cell breakpoint sizes without conflict', () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
       smallWidth: 1,
@@ -294,5 +294,18 @@ describe('components/grid', () => {
     expect(largeStyle.alignSelf).to.equal('flex-end');
     expect(largeStyle.order).to.equal('initial');
     expect(largeStyle.flexBasis).to.equal('25%');
+  });
+
+  it('should allow overridable cell source order', () => {
+    const result = resolveCellStyles({
+      ...Grid.defaultProps,
+      order: 1
+    });
+
+    expect(result).to.not.be.empty;
+
+    for (const style of extractBreakpointStyles(result)) {
+      expect(style.order).to.equal(1);
+    }
   });
 });

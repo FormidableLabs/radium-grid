@@ -24,7 +24,8 @@ const resolveCellStyles = props => {
   const cellDefault = {
     width: props.width,
     horizontalAlign: props.align,
-    verticalAlign: props.verticalAlign
+    verticalAlign: props.verticalAlign,
+    order: props.order
   };
 
   const breakpoints = ['small', 'medium', 'large', 'xlarge'].map(size => {
