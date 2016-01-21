@@ -18,24 +18,24 @@ const horizontalPropType = PropTypes.oneOf(['left', 'center', 'right']);
 const verticalPropType = PropTypes.oneOf(['top', 'middle', 'bottom']);
 Cell.propTypes = {
   width: PropTypes.number,
-  horizontalAlign: verticalPropType,
-  verticalAlign: horizontalPropType,
+  horizontalAlign: horizontalPropType,
+  verticalAlign: verticalPropType,
 
   smallWidth: PropTypes.number,
-  smallHorizontalAlign: verticalPropType,
-  smallVerticalAlign: horizontalPropType,
+  smallHorizontalAlign: horizontalPropType,
+  smallVerticalAlign: verticalPropType,
 
   mediumWidth: PropTypes.number,
-  mediumHorizontalAlign: verticalPropType,
-  mediumVerticalAlign: horizontalPropType,
+  mediumHorizontalAlign: horizontalPropType,
+  mediumVerticalAlign: verticalPropType,
 
   largeWidth: PropTypes.number,
-  largeHorizontalAlign: verticalPropType,
-  largeVerticalAlign: horizontalPropType,
+  largeHorizontalAlign: horizontalPropType,
+  largeVerticalAlign: verticalPropType,
 
   xlargeWidth: PropTypes.number,
-  xlargeHorizontalAlign: verticalPropType,
-  xlargeVerticalAlign: horizontalPropType,
+  xlargeHorizontalAlign: horizontalPropType,
+  xlargeVerticalAlign: verticalPropType,
 
   order: PropTypes.number,
   children: React.PropTypes.node
