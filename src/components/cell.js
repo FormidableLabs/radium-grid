@@ -4,14 +4,8 @@ import resolveCellStyles from './util/resolve-cell-styles';
 import omit from 'lodash.omit';
 
 const Cell = Radium(props => {
-  const cellOverrides = omit(props, 'children');
-
-  const styles = resolveCellStyles({
-    breakpoints: props.breakpoints,
-    cellOverrides: cellOverrides,
-    gridDefaultCells: props.defaultCells,
-    parentStyles: props.style
-  });
+  const styles = resolveCellStyles(props);
+  console.log(styles);
 
   return (
     <div style={styles}>
@@ -20,14 +14,31 @@ const Cell = Radium(props => {
   );
 });
 
+const horizontalPropType = PropTypes.oneOf(['left', 'center', 'right']);
+const verticalPropType = PropTypes.oneOf(['top', 'middle', 'bottom']);
 Cell.propTypes = {
-  alignment: PropTypes.shape({
-    horizontal: PropTypes.oneOf(['left', 'center', 'right']),
-    vertical: PropTypes.oneOf(['top', 'middle', 'bottom'])
-  }),
-  children: React.PropTypes.node,
+  width: PropTypes.number,
+  horizontalAlign: verticalPropType,
+  verticalAlign: horizontalPropType,
+
+  smallWidth: PropTypes.number,
+  smallHorizontalAlign: verticalPropType,
+  smallVerticalAlign: horizontalPropType,
+
+  mediumWidth: PropTypes.number,
+  mediumHorizontalAlign: verticalPropType,
+  mediumVerticalAlign: horizontalPropType,
+
+  largeWidth: PropTypes.number,
+  largeHorizontalAlign: verticalPropType,
+  largeVerticalAlign: horizontalPropType,
+
+  xlargeWidth: PropTypes.number,
+  xlargeHorizontalAlign: verticalPropType,
+  xlargeVerticalAlign: horizontalPropType,
+
   order: PropTypes.number,
-  width: PropTypes.number
+  children: React.PropTypes.node
 };
 
 export default Cell;

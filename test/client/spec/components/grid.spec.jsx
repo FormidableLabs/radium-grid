@@ -16,36 +16,20 @@ describe('components/grid', () => {
       .map(key => result[key]);
   };
 
-  it('should inherit parent style props', () => {
-    const result = resolveCellStyles({
-      breakpoints: Grid.defaultProps.breakpoints,
-      cellOverrides: Cell.defaultProps,
-      gridDefaultCells: Grid.defaultProps.defaultCells,
-      parentStyles: {
-        display: 'flex',
-        flexDirection: 'row'
-      }
-    });
+  it('should be a flex container', () => {
+    const result = resolveCellStyles(Grid.defaultProps);
 
+    expect(result).to.not.be.empty;
     expect(result.display).to.equal('flex');
-    expect(result.flexDirection).to.equal('row');
   });
 
   it('should map grid breakpoints to Radium media queries', () => {
-    const result = resolveCellStyles({
-      breakpoints: Grid.defaultProps.breakpoints,
-      cellOverrides: Cell.defaultProps,
-      gridDefaultCells: Grid.defaultProps.defaultCells,
-      parentStyles: {
-        display: 'flex',
-        flexDirection: 'row'
-      }
-    });
+    let result = resolveCellStyles(Grid.defaultProps);
 
-    const mediaQueries = extractMediaQueries(result);
-    const expectedMediaQueries = Object.keys(
+    let mediaQueries = extractMediaQueries(result);
+    let expectedMediaQueries = Object.keys(
       Grid.defaultProps.breakpoints
-    ).map(key => Grid.defaultProps.breakpoints[key].mediaQuery);
+    ).map(key => Grid.defaultProps.breakpoints[key]);
 
     expect(
       JSON.stringify(mediaQueries)
@@ -55,15 +39,9 @@ describe('components/grid', () => {
   });
 
   it('should resolve styles to sensible defaults when no props are specified', () => {
-    const result = resolveCellStyles({
-      breakpoints: Grid.defaultProps.breakpoints,
-      cellOverrides: Cell.defaultProps,
-      gridDefaultCells: Grid.defaultProps.defaultCells,
-      parentStyles: {
-        display: 'flex',
-        flexDirection: 'row'
-      }
-    });
+    const result = resolveCellStyles(Grid.defaultProps);
+
+    expect(result).to.not.be.empty;
 
     for (const style of extractBreakpointStyles(result)) {
       expect(style.alignSelf).to.equal('flex-start');
@@ -75,26 +53,40 @@ describe('components/grid', () => {
 
   it('should resolve styles when only grid props are specified', () => {
     const result = resolveCellStyles({
-      breakpoints: Grid.defaultProps.breakpoints,
-      cellOverrides: Cell.defaultProps,
-      gridDefaultCells: {
-        width: 1 / 4,
-        alignment: {
-          horizontal: 'right',
-          vertical: 'center'
-        }
-      },
-      parentStyles: {
-        display: 'flex',
-        flexDirection: 'row'
-      }
+      ...Grid.defaultProps,
+      cellWidth: 1 / 4,
+      cellAlign: 'right',
+      cellVerticalAlign: 'bottom'
     });
 
+    expect(result).to.not.be.empty;
+
     for (const style of extractBreakpointStyles(result)) {
-      expect(style.alignSelf).to.equal('center');
+      expect(style.alignSelf).to.equal('flex-end');
       expect(style.justifyContent).to.equal('flex-end');
       expect(style.order).to.equal('initial');
       expect(style.flexBasis).to.have.string('25');
     }
+  });
+
+  it('should resolve styles when grid props and grid breakpoint props are specified', () => {
+    const result = resolveCellStyles({
+      ...Grid.defaultProps,
+      cellWidth: 1 / 4,
+      cellAlign: 'right',
+      cellVerticalAlign: 'bottom',
+      smallCellWidth: 1,
+      smallCellAlign: 'center',
+      smallCellVerticalAlign: 'center'
+    });
+
+    expect(result).to.not.be.empty;
+
+    const smallStyle = result[Grid.defaultProps.breakpoints.small];
+
+    expect(smallStyle.alignSelf).to.equal('center');
+    expect(smallStyle.justifyContent).to.equal('center');
+    expect(smallStyle.order).to.equal('initial');
+    expect(smallStyle.flexBasis).to.equal('100%');
   });
 });

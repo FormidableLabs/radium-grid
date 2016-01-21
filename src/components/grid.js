@@ -1,5 +1,6 @@
 import React, { Children, PropTypes } from 'react';
 import Radium from 'radium';
+import omit from 'lodash.omit';
 
 const Grid = Radium(props => {
   const styles = {
@@ -10,10 +11,7 @@ const Grid = Radium(props => {
 
   const childrenWithProps = Children.map(
     props.children, child => {
-      return React.cloneElement(child, {
-        breakpoints: props.breakpoints,
-        defaultCells: props.defaultCells
-      });
+      return React.cloneElement(child, omit(props, 'children'));
     }
   );
 
@@ -24,52 +22,48 @@ const Grid = Radium(props => {
   );
 });
 
-const cellShape = PropTypes.shape({
-  width: PropTypes.number,
-  alignment: PropTypes.shape({
-    horizontal: PropTypes.oneOf(['left', 'center', 'right']),
-    vertical: PropTypes.oneOf(['top', 'middle', 'bottom'])
-  })
-});
-
-const breakpointShape = PropTypes.shape({
-  mediaQuery: PropTypes.string,
-  cells: cellShape
-});
-
 Grid.propTypes = {
+  cellWidth: PropTypes.number,
+  cellAlign: PropTypes.string,
+  cellVerticalAlign: PropTypes.string,
+
+  smallCellWidth: PropTypes.number,
+  smallCellAlign: PropTypes.string,
+  smallCellVerticalAlign: PropTypes.string,
+
+  mediumCellWidth: PropTypes.number,
+  mediumCellAlign: PropTypes.string,
+  mediumCellVerticalAlign: PropTypes.string,
+
+  largeCellWidth: PropTypes.number,
+  largeCellAlign: PropTypes.string,
+  largeCellVerticalAlign: PropTypes.string,
+
+  xlargeCellWidth: PropTypes.number,
+  xlargeCellAlign: PropTypes.string,
+  xlargeCellVerticalAlign: PropTypes.string,
+
   breakpoints: PropTypes.shape({
-    small: breakpointShape,
-    medium: breakpointShape,
-    large: breakpointShape,
-    xlarge: breakpointShape
+    small: PropTypes.string,
+    medium: PropTypes.string,
+    large: PropTypes.string,
+    xlarge: PropTypes.string
   }),
-  defaultCells: cellShape,
   gutter: PropTypes.number
 };
 
 Grid.defaultProps = {
+  cellWidth: 1 / 3,
+  cellAlign: 'left',
+  cellVerticalAlign: 'top',
+
   breakpoints: {
-    small: {
-      mediaQuery: '@media only screen and (max-width: 640px)'
-    },
-    medium: {
-      mediaQuery: '@media only screen and (min-width: 641px) and (max-width: 1024px)'
-    },
-    large: {
-      mediaQuery: '@media only screen and (min-width: 1025px) and (max-width: 1440px)'
-    },
-    xlarge: {
-      mediaQuery: '@media only screen and (min-width: 1441px)'
-    }
+    small: '@media only screen and (max-width: 640px)',
+    medium: '@media only screen and (min-width: 641px) and (max-width: 1024px)',
+    large: '@media only screen and (min-width: 1025px) and (max-width: 1440px)',
+    xlarge: '@media only screen and (min-width: 1441px)'
   },
-  defaultCells: {
-    width: 1 / 3,
-    alignment: {
-      horizontal: 'left',
-      vertical: 'top'
-    }
-  },
+
   gutter: 24
 };
 
