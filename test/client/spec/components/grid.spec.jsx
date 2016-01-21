@@ -69,7 +69,9 @@ describe('components/grid', () => {
     }
   });
 
-  it('should resolve styles when grid props and grid breakpoint props are specified', () => {
+  it(`should resolve styles when these are specified:
+        1) grid props
+        2) grid breakpoint props`, () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
       cellWidth: 1 / 4,
@@ -77,7 +79,7 @@ describe('components/grid', () => {
       cellVerticalAlign: 'bottom',
       smallCellWidth: 1,
       smallCellAlign: 'center',
-      smallCellVerticalAlign: 'center'
+      smallCellVerticalAlign: 'middle'
     });
 
     expect(result).to.not.be.empty;
@@ -88,5 +90,63 @@ describe('components/grid', () => {
     expect(smallStyle.justifyContent).to.equal('center');
     expect(smallStyle.order).to.equal('initial');
     expect(smallStyle.flexBasis).to.equal('100%');
+  });
+
+  it(`should resolve styles when these are specified:
+        1) grid props,
+        2) grid breakpoint props
+        3) cell props`, () => {
+    const result = resolveCellStyles({
+      ...Grid.defaultProps,
+      cellWidth: 1 / 4,
+      cellAlign: 'right',
+      cellVerticalAlign: 'bottom',
+      smallCellWidth: 1,
+      smallCellAlign: 'center',
+      smallCellVerticalAlign: 'middle',
+      width: 1 / 2,
+      align: 'left',
+      verticalAlign: 'top'
+    });
+
+    expect(result).to.not.be.empty;
+
+    for (const style of extractBreakpointStyles(result)) {
+      expect(style.alignSelf).to.equal('flex-start');
+      expect(style.justifyContent).to.equal('flex-start');
+      expect(style.order).to.equal('initial');
+      expect(style.flexBasis).to.equal('50%');
+    }
+  });
+
+  it(`should resolve styles when these are specified:
+        1) grid props,
+        2) grid breakpoint props
+        3) cell props
+        4) cell breakpoint props`, () => {
+    const result = resolveCellStyles({
+      ...Grid.defaultProps,
+      cellWidth: 1 / 4,
+      cellAlign: 'right',
+      cellVerticalAlign: 'bottom',
+      smallCellWidth: 1,
+      smallCellAlign: 'center',
+      smallCellVerticalAlign: 'middle',
+      width: 1 / 2,
+      align: 'left',
+      verticalAlign: 'top',
+      smallWidth: 1 / 3,
+      smallAlign: 'right',
+      smallVerticalAlign: 'middle'
+    });
+
+    expect(result).to.not.be.empty;
+
+    const smallStyle = result[Grid.defaultProps.breakpoints.small];
+
+    expect(smallStyle.alignSelf).to.equal('center');
+    expect(smallStyle.justifyContent).to.equal('flex-end');
+    expect(smallStyle.order).to.equal('initial');
+    expect(smallStyle.flexBasis).to.have.string('33.333');
   });
 });
