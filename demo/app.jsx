@@ -10,13 +10,13 @@ class App extends React.Component {
     return (
       <StyleRoot className="demo">
         <Grid style={{height: '500px'}}>
-          <Cell>
+          <Cell style={{backgroundColor: 'blue'}}>
             <span>Oy Oy Oy</span>
           </Cell>
-          <Cell>
+          <Cell style={{backgroundColor: 'red'}}>
             <span>Yo Yo Yo</span>
           </Cell>
-          <Cell>
+          <Cell style={{backgroundColor: 'blue'}}>
             <span>Oy Oy Oy</span>
           </Cell>
         </Grid>

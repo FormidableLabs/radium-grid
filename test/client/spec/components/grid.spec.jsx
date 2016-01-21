@@ -1,7 +1,7 @@
 // Help PhantomJS out
 require('babel-polyfill');
 
-import { Grid, Cell } from '../../../../src/index';
+import { Grid } from '../../../../src/index';
 import resolveCellStyles from '../../../../src/components/util/resolve-cell-styles';
 
 describe('components/grid', () => {
@@ -46,7 +46,6 @@ describe('components/grid', () => {
     for (const style of extractBreakpointStyles(result)) {
       expect(style.justifyContent).to.equal('flex-start');
       expect(style.alignSelf).to.equal('flex-start');
-      expect(style.order).to.equal('initial');
       expect(style.flexBasis).to.have.string('33.333');
     }
   });
@@ -65,7 +64,6 @@ describe('components/grid', () => {
     for (const style of extractBreakpointStyles(result)) {
       expect(style.justifyContent).to.equal('flex-end');
       expect(style.alignSelf).to.equal('flex-end');
-      expect(style.order).to.equal('initial');
       expect(style.flexBasis).to.have.string('25');
     }
   });
@@ -89,8 +87,7 @@ describe('components/grid', () => {
 
     expect(smallStyle.justifyContent).to.equal('center');
     expect(smallStyle.alignSelf).to.equal('center');
-    expect(smallStyle.order).to.equal('initial');
-    expect(smallStyle.flexBasis).to.equal('100%');
+    expect(smallStyle.flexBasis).to.have.string('100%');
   });
 
   it(`should resolve styles when these are specified:
@@ -115,8 +112,7 @@ describe('components/grid', () => {
     for (const style of extractBreakpointStyles(result)) {
       expect(style.justifyContent).to.equal('flex-start');
       expect(style.alignSelf).to.equal('flex-start');
-      expect(style.order).to.equal('initial');
-      expect(style.flexBasis).to.equal('50%');
+      expect(style.flexBasis).to.have.string('50%');
     }
   });
 
@@ -147,7 +143,6 @@ describe('components/grid', () => {
 
     expect(smallStyle.justifyContent).to.equal('flex-end');
     expect(smallStyle.alignSelf).to.equal('center');
-    expect(smallStyle.order).to.equal('initial');
     expect(smallStyle.flexBasis).to.have.string('33.333');
   });
 
@@ -179,8 +174,7 @@ describe('components/grid', () => {
 
     expect(mediumStyle.justifyContent).to.equal('flex-end');
     expect(mediumStyle.alignSelf).to.equal('flex-end');
-    expect(mediumStyle.order).to.equal('initial');
-    expect(mediumStyle.flexBasis).to.equal('25%');
+    expect(mediumStyle.flexBasis).to.have.string('25%');
   });
 
   it(`should resolve styles when these are specified:
@@ -198,8 +192,7 @@ describe('components/grid', () => {
     for (const style of extractBreakpointStyles(result)) {
       expect(style.justifyContent).to.equal('center');
       expect(style.alignSelf).to.equal('center');
-      expect(style.order).to.equal('initial');
-      expect(style.flexBasis).to.equal('20%');
+      expect(style.flexBasis).to.have.string('20%');
     }
   });
 
@@ -219,8 +212,7 @@ describe('components/grid', () => {
 
     expect(xlargeStyle.justifyContent).to.equal('flex-end');
     expect(xlargeStyle.alignSelf).to.equal('flex-end');
-    expect(xlargeStyle.order).to.equal('initial');
-    expect(xlargeStyle.flexBasis).to.equal('50%');
+    expect(xlargeStyle.flexBasis).to.have.string('50%');
   });
 
   it(`should resolve styles when these are specified:
@@ -239,8 +231,7 @@ describe('components/grid', () => {
 
     expect(largeStyle.justifyContent).to.equal('flex-start');
     expect(largeStyle.alignSelf).to.equal('flex-start');
-    expect(largeStyle.order).to.equal('initial');
-    expect(largeStyle.flexBasis).to.equal('100%');
+    expect(largeStyle.flexBasis).to.have.string('100%');
   });
 
   it(`should resolve styles when these are specified:
@@ -258,7 +249,6 @@ describe('components/grid', () => {
     for (const style of extractBreakpointStyles(result)) {
       expect(style.justifyContent).to.equal('center');
       expect(style.alignSelf).to.equal('center');
-      expect(style.order).to.equal('initial');
       expect(style.flexBasis).to.have.string('16.666');
     }
   });
@@ -282,18 +272,15 @@ describe('components/grid', () => {
 
     expect(smallStyle.justifyContent).to.equal('flex-end');
     expect(smallStyle.alignSelf).to.equal('center');
-    expect(smallStyle.order).to.equal('initial');
-    expect(smallStyle.flexBasis).to.equal('100%');
+    expect(smallStyle.flexBasis).to.have.string('100%');
 
     expect(mediumStyle.justifyContent).to.equal('flex-start');
     expect(mediumStyle.alignSelf).to.equal('flex-start');
-    expect(mediumStyle.order).to.equal('initial');
     expect(mediumStyle.flexBasis).to.have.string('33.333');
 
     expect(largeStyle.justifyContent).to.equal('center');
     expect(largeStyle.alignSelf).to.equal('flex-end');
-    expect(largeStyle.order).to.equal('initial');
-    expect(largeStyle.flexBasis).to.equal('25%');
+    expect(largeStyle.flexBasis).to.have.string('25%');
   });
 
   it('should allow overridable cell source order', () => {
@@ -307,5 +294,41 @@ describe('components/grid', () => {
     for (const style of extractBreakpointStyles(result)) {
       expect(style.order).to.equal(1);
     }
+  });
+
+  it('should allow customizable fixed gutters', () => {
+    const result = resolveCellStyles({
+      ...Grid.defaultProps,
+      gutter: '16px'
+    });
+
+    for (const style of extractBreakpointStyles(result)) {
+      expect(style.flexBasis).to.have.string('calc(33.333');
+      expect(style.flexBasis).to.have.string('- 16px');
+    }
+  });
+
+  it('should allow customizable fluid gutters', () => {
+    const result = resolveCellStyles({
+      ...Grid.defaultProps,
+      gutter: '2%'
+    });
+
+    for (const style of extractBreakpointStyles(result)) {
+      expect(style.flexBasis).to.have.string('calc(33.333');
+      expect(style.flexBasis).to.have.string('- 2%');
+    }
+  });
+
+  it('REGRESSION: should not clobber custom cell styles', () => {
+    const result = resolveCellStyles({
+      ...Grid.defaultProps,
+      style: {
+        backgroundColor: 'blue'
+      }
+    });
+
+    expect(result).to.not.be.empty;
+    expect(result.backgroundColor).to.equal('blue');
   });
 });
