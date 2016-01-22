@@ -1,11 +1,10 @@
-/* global document:false */
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Radium, { StyleRoot } from 'radium';
 import { Grid, Cell } from '../src/index';
 
 @Radium
-class App extends React.Component {
+class App extends Component {
   render() {
     return (
       <StyleRoot className="demo">
