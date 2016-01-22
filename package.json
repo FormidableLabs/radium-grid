@@ -19,6 +19,7 @@
     "test": "builder run npm:test"
   },
   "dependencies": {
+    "babel-preset-es2015": "^6.3.13",
     "builder": "~2.4.0",
     "builder-radium-component": "^0.2.0",
     "lodash.merge": "^4.0.1",
