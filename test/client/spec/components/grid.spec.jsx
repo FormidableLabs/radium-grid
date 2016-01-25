@@ -1,35 +1,35 @@
 // Help PhantomJS out
-require('babel-polyfill');
+require("babel-polyfill");
 
-import { Grid } from '../../../../src/index';
-import resolveCellStyles from '../../../../src/components/util/resolve-cell-styles';
+import { Grid } from "../../../../src/index";
+import resolveCellStyles from "../../../../src/components/util/resolve-cell-styles";
 
-describe('components/grid', () => {
-  const extractMediaQueries = result => {
+describe("components/grid", () => {
+  const extractMediaQueries = (result) => {
     return Object.keys(result).filter(
-      key => !key.search(/@media/g)
+      (key) => !key.search(/@media/g)
     );
   };
 
-  const extractBreakpointStyles = result => {
+  const extractBreakpointStyles = (result) => {
     return extractMediaQueries(result)
-      .map(key => result[key]);
+      .map((key) => result[key]);
   };
 
-  it('should be a flex container', () => {
+  it("should be a flex container", () => {
     const result = resolveCellStyles(Grid.defaultProps);
 
     expect(result).to.not.be.empty;
-    expect(result.display).to.equal('flex');
+    expect(result.display).to.equal("flex");
   });
 
-  it('should map grid breakpoints to Radium media queries', () => {
-    let result = resolveCellStyles(Grid.defaultProps);
+  it("should map grid breakpoints to Radium media queries", () => {
+    const result = resolveCellStyles(Grid.defaultProps);
 
-    let mediaQueries = extractMediaQueries(result);
-    let expectedMediaQueries = Object.keys(
+    const mediaQueries = extractMediaQueries(result);
+    const expectedMediaQueries = Object.keys(
       Grid.defaultProps.breakpoints
-    ).map(key => Grid.defaultProps.breakpoints[key]);
+    ).map((key) => Grid.defaultProps.breakpoints[key]);
 
     expect(
       JSON.stringify(mediaQueries)
@@ -38,15 +38,15 @@ describe('components/grid', () => {
     );
   });
 
-  it('should resolve styles to sensible defaults when no props are specified', () => {
+  it("should resolve styles to sensible defaults when no props are specified", () => {
     const result = resolveCellStyles(Grid.defaultProps);
 
     expect(result).to.not.be.empty;
 
     for (const style of extractBreakpointStyles(result)) {
-      expect(style.justifyContent).to.equal('flex-start');
-      expect(style.alignSelf).to.equal('flex-start');
-      expect(style.flexBasis).to.have.string('33.333');
+      expect(style.justifyContent).to.equal("flex-start");
+      expect(style.alignSelf).to.equal("flex-start");
+      expect(style.flexBasis).to.have.string("33.333");
     }
   });
 
@@ -55,16 +55,16 @@ describe('components/grid', () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
       cellWidth: 1 / 4,
-      cellAlign: 'right',
-      cellVerticalAlign: 'bottom'
+      cellAlign: "right",
+      cellVerticalAlign: "bottom"
     });
 
     expect(result).to.not.be.empty;
 
     for (const style of extractBreakpointStyles(result)) {
-      expect(style.justifyContent).to.equal('flex-end');
-      expect(style.alignSelf).to.equal('flex-end');
-      expect(style.flexBasis).to.have.string('25');
+      expect(style.justifyContent).to.equal("flex-end");
+      expect(style.alignSelf).to.equal("flex-end");
+      expect(style.flexBasis).to.have.string("25");
     }
   });
 
@@ -74,20 +74,20 @@ describe('components/grid', () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
       cellWidth: 1 / 4,
-      cellAlign: 'right',
-      cellVerticalAlign: 'bottom',
+      cellAlign: "right",
+      cellVerticalAlign: "bottom",
       smallCellWidth: 1,
-      smallCellAlign: 'center',
-      smallCellVerticalAlign: 'middle'
+      smallCellAlign: "center",
+      smallCellVerticalAlign: "middle"
     });
 
     expect(result).to.not.be.empty;
 
     const smallStyle = result[Grid.defaultProps.breakpoints.small];
 
-    expect(smallStyle.justifyContent).to.equal('center');
-    expect(smallStyle.alignSelf).to.equal('center');
-    expect(smallStyle.flexBasis).to.have.string('100%');
+    expect(smallStyle.justifyContent).to.equal("center");
+    expect(smallStyle.alignSelf).to.equal("center");
+    expect(smallStyle.flexBasis).to.have.string("100%");
   });
 
   it(`should resolve styles when these are specified:
@@ -97,22 +97,22 @@ describe('components/grid', () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
       cellWidth: 1 / 4,
-      cellAlign: 'right',
-      cellVerticalAlign: 'bottom',
+      cellAlign: "right",
+      cellVerticalAlign: "bottom",
       smallCellWidth: 1,
-      smallCellAlign: 'center',
-      smallCellVerticalAlign: 'middle',
+      smallCellAlign: "center",
+      smallCellVerticalAlign: "middle",
       width: 1 / 2,
-      align: 'left',
-      verticalAlign: 'top'
+      align: "left",
+      verticalAlign: "top"
     });
 
     expect(result).to.not.be.empty;
 
     for (const style of extractBreakpointStyles(result)) {
-      expect(style.justifyContent).to.equal('flex-start');
-      expect(style.alignSelf).to.equal('flex-start');
-      expect(style.flexBasis).to.have.string('50%');
+      expect(style.justifyContent).to.equal("flex-start");
+      expect(style.alignSelf).to.equal("flex-start");
+      expect(style.flexBasis).to.have.string("50%");
     }
   });
 
@@ -124,26 +124,26 @@ describe('components/grid', () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
       cellWidth: 1 / 4,
-      cellAlign: 'right',
-      cellVerticalAlign: 'bottom',
+      cellAlign: "right",
+      cellVerticalAlign: "bottom",
       smallCellWidth: 1,
-      smallCellAlign: 'center',
-      smallCellVerticalAlign: 'middle',
+      smallCellAlign: "center",
+      smallCellVerticalAlign: "middle",
       width: 1 / 2,
-      align: 'left',
-      verticalAlign: 'top',
+      align: "left",
+      verticalAlign: "top",
       smallWidth: 1 / 3,
-      smallAlign: 'right',
-      smallVerticalAlign: 'middle'
+      smallAlign: "right",
+      smallVerticalAlign: "middle"
     });
 
     expect(result).to.not.be.empty;
 
     const smallStyle = result[Grid.defaultProps.breakpoints.small];
 
-    expect(smallStyle.justifyContent).to.equal('flex-end');
-    expect(smallStyle.alignSelf).to.equal('center');
-    expect(smallStyle.flexBasis).to.have.string('33.333');
+    expect(smallStyle.justifyContent).to.equal("flex-end");
+    expect(smallStyle.alignSelf).to.equal("center");
+    expect(smallStyle.flexBasis).to.have.string("33.333");
   });
 
   // Pairwise tests
@@ -161,20 +161,20 @@ describe('components/grid', () => {
     const result = resolveCellStyles({
       ...{ breakpoints, gutter },
       mediumCellWidth: 1,
-      mediumCellAlign: 'center',
-      mediumCellVerticalAlign: 'middle',
+      mediumCellAlign: "center",
+      mediumCellVerticalAlign: "middle",
       mediumWidth: 1 / 4,
-      mediumAlign: 'right',
-      mediumVerticalAlign: 'bottom'
+      mediumAlign: "right",
+      mediumVerticalAlign: "bottom"
     });
 
     expect(result).to.not.be.empty;
 
     const mediumStyle = result[Grid.defaultProps.breakpoints.medium];
 
-    expect(mediumStyle.justifyContent).to.equal('flex-end');
-    expect(mediumStyle.alignSelf).to.equal('flex-end');
-    expect(mediumStyle.flexBasis).to.have.string('25%');
+    expect(mediumStyle.justifyContent).to.equal("flex-end");
+    expect(mediumStyle.alignSelf).to.equal("flex-end");
+    expect(mediumStyle.flexBasis).to.have.string("25%");
   });
 
   it(`should resolve styles when these are specified:
@@ -183,16 +183,16 @@ describe('components/grid', () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
       width: 1 / 5,
-      align: 'center',
-      verticalAlign: 'middle'
+      align: "center",
+      verticalAlign: "middle"
     });
 
     expect(result).to.not.be.empty;
 
     for (const style of extractBreakpointStyles(result)) {
-      expect(style.justifyContent).to.equal('center');
-      expect(style.alignSelf).to.equal('center');
-      expect(style.flexBasis).to.have.string('20%');
+      expect(style.justifyContent).to.equal("center");
+      expect(style.alignSelf).to.equal("center");
+      expect(style.flexBasis).to.have.string("20%");
     }
   });
 
@@ -202,17 +202,17 @@ describe('components/grid', () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
       xlargeWidth: 1 / 2,
-      xlargeAlign: 'right',
-      xlargeVerticalAlign: 'bottom'
+      xlargeAlign: "right",
+      xlargeVerticalAlign: "bottom"
     });
 
     expect(result).to.not.be.empty;
 
     const xlargeStyle = result[Grid.defaultProps.breakpoints.xlarge];
 
-    expect(xlargeStyle.justifyContent).to.equal('flex-end');
-    expect(xlargeStyle.alignSelf).to.equal('flex-end');
-    expect(xlargeStyle.flexBasis).to.have.string('50%');
+    expect(xlargeStyle.justifyContent).to.equal("flex-end");
+    expect(xlargeStyle.alignSelf).to.equal("flex-end");
+    expect(xlargeStyle.flexBasis).to.have.string("50%");
   });
 
   it(`should resolve styles when these are specified:
@@ -221,17 +221,17 @@ describe('components/grid', () => {
     const result = resolveCellStyles({
       ...{ breakpoints, gutter },
       largeCellWidth: 1,
-      largeCellAlign: 'left',
-      largeCellVerticalAlign: 'top'
+      largeCellAlign: "left",
+      largeCellVerticalAlign: "top"
     });
 
     expect(result).to.not.be.empty;
 
     const largeStyle = result[Grid.defaultProps.breakpoints.large];
 
-    expect(largeStyle.justifyContent).to.equal('flex-start');
-    expect(largeStyle.alignSelf).to.equal('flex-start');
-    expect(largeStyle.flexBasis).to.have.string('100%');
+    expect(largeStyle.justifyContent).to.equal("flex-start");
+    expect(largeStyle.alignSelf).to.equal("flex-start");
+    expect(largeStyle.flexBasis).to.have.string("100%");
   });
 
   it(`should resolve styles when these are specified:
@@ -240,28 +240,28 @@ describe('components/grid', () => {
     const result = resolveCellStyles({
       ...{ breakpoints, gutter },
       width: 1 / 6,
-      align: 'center',
-      verticalAlign: 'middle'
+      align: "center",
+      verticalAlign: "middle"
     });
 
     expect(result).to.not.be.empty;
 
     for (const style of extractBreakpointStyles(result)) {
-      expect(style.justifyContent).to.equal('center');
-      expect(style.alignSelf).to.equal('center');
-      expect(style.flexBasis).to.have.string('16.666');
+      expect(style.justifyContent).to.equal("center");
+      expect(style.alignSelf).to.equal("center");
+      expect(style.flexBasis).to.have.string("16.666");
     }
   });
 
-  it('should resolve individual cell breakpoint sizes without conflict', () => {
+  it("should resolve individual cell breakpoint sizes without conflict", () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
       smallWidth: 1,
-      smallAlign: 'right',
-      smallVerticalAlign: 'middle',
+      smallAlign: "right",
+      smallVerticalAlign: "middle",
       largeWidth: 1 / 4,
-      largeAlign: 'center',
-      largeVerticalAlign: 'bottom'
+      largeAlign: "center",
+      largeVerticalAlign: "bottom"
     });
 
     expect(result).to.not.be.empty;
@@ -270,20 +270,20 @@ describe('components/grid', () => {
     const mediumStyle = result[Grid.defaultProps.breakpoints.medium];
     const largeStyle = result[Grid.defaultProps.breakpoints.large];
 
-    expect(smallStyle.justifyContent).to.equal('flex-end');
-    expect(smallStyle.alignSelf).to.equal('center');
-    expect(smallStyle.flexBasis).to.have.string('100%');
+    expect(smallStyle.justifyContent).to.equal("flex-end");
+    expect(smallStyle.alignSelf).to.equal("center");
+    expect(smallStyle.flexBasis).to.have.string("100%");
 
-    expect(mediumStyle.justifyContent).to.equal('flex-start');
-    expect(mediumStyle.alignSelf).to.equal('flex-start');
-    expect(mediumStyle.flexBasis).to.have.string('33.333');
+    expect(mediumStyle.justifyContent).to.equal("flex-start");
+    expect(mediumStyle.alignSelf).to.equal("flex-start");
+    expect(mediumStyle.flexBasis).to.have.string("33.333");
 
-    expect(largeStyle.justifyContent).to.equal('center');
-    expect(largeStyle.alignSelf).to.equal('flex-end');
-    expect(largeStyle.flexBasis).to.have.string('25%');
+    expect(largeStyle.justifyContent).to.equal("center");
+    expect(largeStyle.alignSelf).to.equal("flex-end");
+    expect(largeStyle.flexBasis).to.have.string("25%");
   });
 
-  it('should allow overridable cell source order', () => {
+  it("should allow overridable cell source order", () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
       order: 1
@@ -296,39 +296,39 @@ describe('components/grid', () => {
     }
   });
 
-  it('should allow customizable fixed gutters', () => {
+  it("should allow customizable fixed gutters", () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
-      gutter: '16px'
+      gutter: "16px"
     });
 
     for (const style of extractBreakpointStyles(result)) {
-      expect(style.flexBasis).to.have.string('calc(33.333');
-      expect(style.flexBasis).to.have.string('- 16px');
+      expect(style.flexBasis).to.have.string("calc(33.333");
+      expect(style.flexBasis).to.have.string("- 16px");
     }
   });
 
-  it('should allow customizable fluid gutters', () => {
+  it("should allow customizable fluid gutters", () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
-      gutter: '2%'
+      gutter: "2%"
     });
 
     for (const style of extractBreakpointStyles(result)) {
-      expect(style.flexBasis).to.have.string('calc(33.333');
-      expect(style.flexBasis).to.have.string('- 2%');
+      expect(style.flexBasis).to.have.string("calc(33.333");
+      expect(style.flexBasis).to.have.string("- 2%");
     }
   });
 
-  it('REGRESSION: should not clobber custom cell styles', () => {
+  it("REGRESSION: should not clobber custom cell styles", () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
       style: {
-        backgroundColor: 'blue'
+        backgroundColor: "blue"
       }
     });
 
     expect(result).to.not.be.empty;
-    expect(result.backgroundColor).to.equal('blue');
+    expect(result.backgroundColor).to.equal("blue");
   });
 });

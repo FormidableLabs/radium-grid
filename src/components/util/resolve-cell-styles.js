@@ -1,17 +1,19 @@
-import merge from 'lodash.merge';
+import merge from "lodash.merge";
 
-const resolveCellStyles = props => {
+const PERCENTAGE = 100;
+
+const resolveCellStyles = (props) => {
   // Translate grid-speak to flexbox-speak
   const alignmentMap = {
     horizontal: {
-      left: 'flex-start',
-      center: 'center',
-      right: 'flex-end'
+      left: "flex-start",
+      center: "center",
+      right: "flex-end"
     },
     vertical: {
-      top: 'flex-start',
-      middle: 'center',
-      bottom: 'flex-end'
+      top: "flex-start",
+      middle: "center",
+      bottom: "flex-end"
     }
   };
 
@@ -28,7 +30,7 @@ const resolveCellStyles = props => {
     order: props.order
   };
 
-  const breakpoints = ['small', 'medium', 'large', 'xlarge'].map(size => {
+  const breakpoints = ["small", "medium", "large", "xlarge"].map((size) => {
     return {
       mediaQuery: props.breakpoints[size],
       gridBreakpointDefault: {
@@ -68,18 +70,18 @@ const resolveCellStyles = props => {
     return {
       ...acc,
       [mediaQuery]: {
-        flexBasis: `calc(${cellConfig.width * 100}% - ${props.gutter})`,
+        flexBasis: `calc(${cellConfig.width * PERCENTAGE}% - ${props.gutter})`,
         alignSelf: alignmentMap.vertical[
           cellConfig.verticalAlign
         ],
         justifyContent: alignmentMap.horizontal[
           cellConfig.horizontalAlign
         ],
-        order: cellConfig.order ? cellConfig.order : 'initial'
+        order: cellConfig.order ? cellConfig.order : "initial"
       }
     };
   }, {
-    display: 'flex',
+    display: "flex",
     ...props.style
   });
 };

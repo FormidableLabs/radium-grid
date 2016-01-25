@@ -1,19 +1,19 @@
-import React, { PropTypes } from 'react';
-import Radium from 'radium';
-import resolveCellStyles from './util/resolve-cell-styles';
+import React, { PropTypes } from "react";
+import Radium from "radium";
+import resolveCellStyles from "./util/resolve-cell-styles";
 
-const Cell = Radium(props => {
+const Cell = new Radium((props, {children}) => {
   const styles = resolveCellStyles(props);
 
   return (
     <div style={styles}>
-      {props.children}
+      {children}
     </div>
   );
 });
 
-const horizontalPropType = PropTypes.oneOf(['left', 'center', 'right']);
-const verticalPropType = PropTypes.oneOf(['top', 'middle', 'bottom']);
+const horizontalPropType = PropTypes.oneOf(["left", "center", "right"]);
+const verticalPropType = PropTypes.oneOf(["top", "middle", "bottom"]);
 Cell.propTypes = {
   width: PropTypes.number,
   horizontalAlign: horizontalPropType,

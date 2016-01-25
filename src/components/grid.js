@@ -1,19 +1,19 @@
-import React, { Children, PropTypes } from 'react';
-import Radium from 'radium';
-import omit from 'lodash.omit';
+import React, { Children, PropTypes } from "react";
+import Radium from "radium";
+import omit from "lodash.omit";
 
-const Grid = Radium(props => {
+const Grid = new Radium((props, {style, children}) => {
   const styles = {
-    ...props.style,
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between'
+    ...style,
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between"
   };
 
-  const childProps = omit(props, ['children', 'style']);
+  const childProps = omit(props, ["children", "style"]);
   const childrenWithProps = Children.map(
-    props.children, child => {
+    children, (child) => {
       return React.cloneElement(child, childProps);
     }
   );
@@ -57,18 +57,18 @@ Grid.propTypes = {
 };
 
 Grid.defaultProps = {
-  cellWidth: 1 / 3,
-  cellAlign: 'left',
-  cellVerticalAlign: 'top',
+  cellWidth: 1 / 3, // eslint-disable-line no-magic-numbers
+  cellAlign: "left",
+  cellVerticalAlign: "top",
 
   breakpoints: {
-    small: '@media only screen and (max-width: 640px)',
-    medium: '@media only screen and (min-width: 641px) and (max-width: 1024px)',
-    large: '@media only screen and (min-width: 1025px) and (max-width: 1440px)',
-    xlarge: '@media only screen and (min-width: 1441px)'
+    small: "@media only screen and (max-width: 640px)",
+    medium: "@media only screen and (min-width: 641px) and (max-width: 1024px)",
+    large: "@media only screen and (min-width: 1025px) and (max-width: 1440px)",
+    xlarge: "@media only screen and (min-width: 1441px)"
   },
 
-  gutter: '24px'
+  gutter: "24px"
 };
 
 export default Grid;
