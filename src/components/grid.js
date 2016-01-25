@@ -1,10 +1,11 @@
+/* eslint-disable new-cap */
 import React, { Children, PropTypes } from "react";
 import Radium from "radium";
 import omit from "lodash.omit";
 
-const Grid = new Radium((props, {style, children}) => {
+const Grid = (props) => {
   const styles = {
-    ...style,
+    ...props.style,
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
@@ -13,7 +14,7 @@ const Grid = new Radium((props, {style, children}) => {
 
   const childProps = omit(props, ["children", "style"]);
   const childrenWithProps = Children.map(
-    children, (child) => {
+    props.children, (child) => {
       return React.cloneElement(child, childProps);
     }
   );
@@ -23,7 +24,7 @@ const Grid = new Radium((props, {style, children}) => {
       {childrenWithProps}
     </div>
   );
-});
+};
 
 Grid.propTypes = {
   cellWidth: PropTypes.number,
@@ -53,7 +54,10 @@ Grid.propTypes = {
     xlarge: PropTypes.string
   }),
 
-  gutter: PropTypes.string
+  gutter: PropTypes.string,
+
+  style: PropTypes.object,
+  children: PropTypes.node
 };
 
 Grid.defaultProps = {
@@ -71,4 +75,4 @@ Grid.defaultProps = {
   gutter: "24px"
 };
 
-export default Grid;
+export default Radium(Grid);
