@@ -81,7 +81,6 @@ const resolveCellStyles = (props) => {
       }
     };
   }, {
-    display: "flex",
     ...props.style
   });
 };

@@ -16,13 +16,6 @@ describe("components/grid", () => {
       .map((key) => result[key]);
   };
 
-  it("should be a flex container", () => {
-    const result = resolveCellStyles(Grid.defaultProps);
-
-    expect(result).to.not.be.empty;
-    expect(result.display).to.equal("flex");
-  });
-
   it("should map grid breakpoints to Radium media queries", () => {
     const result = resolveCellStyles(Grid.defaultProps);
 
