@@ -72,7 +72,7 @@ Grid.defaultProps = {
     xlarge: "@media only screen and (min-width: 1441px)"
   },
 
-  gutter: "24px"
+  gutter: "16px"
 };
 
 export default Radium(Grid);
