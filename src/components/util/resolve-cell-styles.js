@@ -1,6 +1,16 @@
 import merge from "lodash.merge";
+import { mergeStyles } from "radium/lib/merge-styles";
 
 const PERCENTAGE = 100;
+
+// Merge Radium style arrays and leave
+// normal style objects untouched
+const resolvePropStyles = (styles) => {
+  if (styles && Array.isArray(styles)) {
+    return mergeStyles(styles);
+  }
+  return styles ? styles : {};
+};
 
 const resolveCellStyles = (props) => {
   // Translate grid-speak to flexbox-speak
@@ -80,9 +90,7 @@ const resolveCellStyles = (props) => {
         order: cellConfig.order ? cellConfig.order : "initial"
       }
     };
-  }, {
-    ...props.style
-  });
+  }, { ...resolvePropStyles(props.style) });
 };
 
 export default resolveCellStyles;

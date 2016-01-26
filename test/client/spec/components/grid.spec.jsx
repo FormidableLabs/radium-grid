@@ -313,7 +313,7 @@ describe("components/grid", () => {
     }
   });
 
-  it("REGRESSION: should not clobber custom cell styles", () => {
+  it("should apply custom props style objects", () => {
     const result = resolveCellStyles({
       ...Grid.defaultProps,
       style: {
@@ -323,5 +323,20 @@ describe("components/grid", () => {
 
     expect(result).to.not.be.empty;
     expect(result.backgroundColor).to.equal("blue");
+  });
+
+  it("should apply custom props Radium style arrays", () => {
+    const result = resolveCellStyles({
+      ...Grid.defaultProps,
+      style: [{
+        backgroundColor: "blue"
+      }, {
+        padding: "1rem"
+      }]
+    });
+
+    expect(result).to.not.be.empty;
+    expect(result.backgroundColor).to.equal("blue");
+    expect(result.padding).to.equal("1rem");
   });
 });
