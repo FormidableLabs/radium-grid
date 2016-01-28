@@ -6,7 +6,6 @@ import last from "lodash.last";
 import Fraction from "fraction.js";
 
 const resolveColumnCounts = ({ children, breakpoints }) => {
-  // console.log(children.map((child) => child.props));
   // Create an array of column counts that matches
   // the indices of the cell array. This way, each
   // cell knows about how many columns its parent
