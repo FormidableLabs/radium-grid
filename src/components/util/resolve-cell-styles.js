@@ -1,7 +1,31 @@
-import merge from "lodash.merge";
+/* eslint-disable no-magic-numbers */
 import { mergeStyles } from "radium/lib/merge-styles";
+import Fraction from "fraction.js";
 
-const PERCENTAGE = 100;
+const parseUnit = (value) => {
+  // http://stackoverflow.com/questions/2868947/split1px-into-1px-1-px-in-javascript
+  const matches = value.match(/^(\d+(?:\.\d+)?)(.*)$/);
+  const [, number, unit] = matches;
+  return { number, unit };
+};
+
+const resolveCellGutter = ({ gutter, columnCount }) => {
+  const { number, unit } = parseUnit(gutter);
+  return `${(number - (number / columnCount))}${unit}`;
+};
+
+const resolveCellFlexBasis = ({ width, gutter, columnCount }) => {
+  const MULTIPLIER = 100;
+
+  // Full-width cells have no gutter
+  if (width.d === 1) {
+    return "100%";
+  }
+
+  const finalGutter = resolveCellGutter({ gutter, columnCount });
+
+  return `calc(${width.valueOf() * MULTIPLIER}% - ${finalGutter})`;
+};
 
 // Merge Radium style arrays and leave
 // normal style objects untouched
@@ -27,67 +51,28 @@ const resolveCellStyles = (props) => {
     }
   };
 
-  const gridDefault = {
-    width: props.cellWidth,
-    horizontalAlign: props.cellAlign,
-    verticalAlign: props.cellVerticalAlign
-  };
+  const mediaQueries = Object.keys(props)
+    .filter((key) => key.indexOf("@media") !== -1);
 
-  const cellDefault = {
-    width: props.width,
-    horizontalAlign: props.align,
-    verticalAlign: props.verticalAlign,
-    order: props.order
-  };
-
-  const breakpoints = ["small", "medium", "large", "xlarge"].map((size) => {
-    return {
-      mediaQuery: props.breakpoints[size],
-      gridBreakpointDefault: {
-        width: props[`${size}CellWidth`],
-        horizontalAlign: props[`${size}CellAlign`],
-        verticalAlign: props[`${size}CellVerticalAlign`]
-      },
-      cellBreakpointDefault: {
-        width: props[`${size}Width`],
-        horizontalAlign: props[`${size}Align`],
-        verticalAlign: props[`${size}VerticalAlign`]
-      }
-    };
-  });
-
-  return Object.keys(breakpoints).reduce((acc, breakpoint) => {
-    // Extract the media query and the breakpoint cell configs
-    const {
-      mediaQuery,
-      gridBreakpointDefault,
-      cellBreakpointDefault
-    } = breakpoints[breakpoint];
-
-    // Determine the final cell configuration.
-    // Uses these sources for cell styles, in order of precedence:
-    // - Grid default
-    // - Grid breakpoint default
-    // - Cell default
-    // - Cell breakpoint default
-    const cellConfig = merge({},
-      gridDefault,
-      gridBreakpointDefault,
-      cellDefault,
-      cellBreakpointDefault
-    );
+  return mediaQueries.reduce((acc, mediaQuery) => {
+    const breakpointStyles = props[mediaQuery];
 
     return {
       ...acc,
       [mediaQuery]: {
-        flexBasis: `calc(${cellConfig.width * PERCENTAGE}% - ${props.gutter})`,
+        flexBasis: resolveCellFlexBasis({
+          width: new Fraction(breakpointStyles.width),
+          gutter: breakpointStyles.gutter,
+          columnCount: breakpointStyles.columnCount
+        }),
         alignSelf: alignmentMap.vertical[
-          cellConfig.verticalAlign
+          breakpointStyles.verticalAlign
         ],
         justifyContent: alignmentMap.horizontal[
-          cellConfig.horizontalAlign
+          breakpointStyles.horizontalAlign
         ],
-        order: cellConfig.order ? cellConfig.order : "initial"
+        order: breakpointStyles.order ? breakpointStyles.order : "initial",
+        height: "150px"
       }
     };
   }, { ...resolvePropStyles(props.style) });
