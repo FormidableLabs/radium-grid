@@ -161,7 +161,8 @@ App.styles = {
   cell: {
     marginBottom: "1rem",
     padding: "1rem",
-    minWidth: "0"
+    minWidth: "0",
+    height: "150px"
   },
   redCell: {
     backgroundColor: colors.shade1

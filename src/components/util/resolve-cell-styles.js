@@ -39,16 +39,12 @@ const resolvePropStyles = (styles) => {
 const resolveCellStyles = (props) => {
   // Translate grid-speak to flexbox-speak
   const alignmentMap = {
-    horizontal: {
-      left: "flex-start",
-      center: "center",
-      right: "flex-end"
-    },
-    vertical: {
-      top: "flex-start",
-      middle: "center",
-      bottom: "flex-end"
-    }
+    left: "flex-start",
+    center: "center",
+    right: "flex-end",
+    top: "flex-start",
+    middle: "center",
+    bottom: "flex-end"
   };
 
   const mediaQueries = Object.keys(props)
@@ -65,14 +61,9 @@ const resolveCellStyles = (props) => {
           gutter: breakpointStyles.gutter,
           columnCount: breakpointStyles.columnCount
         }),
-        alignSelf: alignmentMap.vertical[
-          breakpointStyles.verticalAlign
-        ],
-        justifyContent: alignmentMap.horizontal[
-          breakpointStyles.horizontalAlign
-        ],
-        order: breakpointStyles.order ? breakpointStyles.order : "initial",
-        height: "150px"
+        alignSelf: alignmentMap[breakpointStyles.verticalAlign],
+        justifyContent: alignmentMap[breakpointStyles.horizontalAlign],
+        order: breakpointStyles.order ? breakpointStyles.order : "initial"
       }
     };
   }, { ...resolvePropStyles(props.style) });
