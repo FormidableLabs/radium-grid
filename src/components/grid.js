@@ -9,7 +9,8 @@ const Grid = (props) => {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    width: "100%"
   };
 
   return (

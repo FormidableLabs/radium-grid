@@ -56,12 +56,13 @@ const resolveCellStyles = (props) => {
     return {
       ...acc,
       [mediaQuery]: {
+        display: "flex",
         flexBasis: resolveCellFlexBasis({
           width: new Fraction(breakpointStyles.width),
           gutter: breakpointStyles.gutter,
           columnCount: breakpointStyles.columnCount
         }),
-        alignSelf: alignmentMap[breakpointStyles.verticalAlign],
+        alignItems: alignmentMap[breakpointStyles.verticalAlign],
         justifyContent: alignmentMap[breakpointStyles.horizontalAlign],
         order: breakpointStyles.order ? breakpointStyles.order : "initial"
       }

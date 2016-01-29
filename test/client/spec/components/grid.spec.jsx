@@ -88,6 +88,23 @@ describe("components/grid", () => {
     }
   });
 
+  it("should be a flex container to allow for custom cell content alignment", () => {
+    const grid = (
+      <Grid>
+        <Cell>
+          <p>testing</p>
+        </Cell>
+        <Cell>
+          <p>testing!</p>
+        </Cell>
+      </Grid>
+    );
+    const cells = resolveCells(grid.props);
+    testCellsAllBreakpoints(cells, (style) => {
+      expect(style.display).to.equal("flex");
+    });
+  });
+
   it("should resolve styles to sensible defaults when no props are specified", () => {
     const grid = (
       <Grid>
@@ -103,7 +120,7 @@ describe("components/grid", () => {
 
     testCellsAllBreakpoints(cells, (style) => {
       expect(style.justifyContent).to.equal("flex-start");
-      expect(style.alignSelf).to.equal("flex-start");
+      expect(style.alignItems).to.equal("flex-start");
       expect(style.flexBasis).to.have.string("33.333");
     });
   });
@@ -127,7 +144,7 @@ describe("components/grid", () => {
     const cells = resolveCells(grid.props);
     testCellsAllBreakpoints(cells, (style) => {
       expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignSelf).to.equal("flex-end");
+      expect(style.alignItems).to.equal("flex-end");
       expect(style.flexBasis).to.have.string("25");
     });
   });
@@ -156,14 +173,14 @@ describe("components/grid", () => {
 
     testCellsAllBreakpointsExcept(cells, "small", (style) => {
       expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignSelf).to.equal("flex-end");
+      expect(style.alignItems).to.equal("flex-end");
       expect(style.flexBasis).to.have.string("25");
     });
 
     // Check only small breakpoints on all cells
     testCellsOneBreakpoint(cells, "small", (style) => {
       expect(style.justifyContent).to.equal("center");
-      expect(style.alignSelf).to.equal("center");
+      expect(style.alignItems).to.equal("center");
       expect(style.flexBasis).to.have.string("100%");
     });
   });
@@ -201,21 +218,21 @@ describe("components/grid", () => {
 
     testCellsAllBreakpoints([cellWithCellProps], (style) => {
       expect(style.justifyContent).to.equal("flex-start");
-      expect(style.alignSelf).to.equal("flex-start");
+      expect(style.alignItems).to.equal("flex-start");
       expect(style.flexBasis).to.have.string("50%");
     });
 
     // Cells with grid props, excluding small breakpoint
     testCellsAllBreakpointsExcept(cellsWithoutCellProps, "small", (style) => {
       expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignSelf).to.equal("flex-end");
+      expect(style.alignItems).to.equal("flex-end");
       expect(style.flexBasis).to.have.string("25%");
     });
 
     // Cells with small grid breakpoint props
     testCellsOneBreakpoint(cellsWithoutCellProps, "small", (style) => {
       expect(style.justifyContent).to.equal("center");
-      expect(style.alignSelf).to.equal("center");
+      expect(style.alignItems).to.equal("center");
       expect(style.flexBasis).to.have.string("100%");
     });
   });
@@ -258,27 +275,27 @@ describe("components/grid", () => {
 
     testCellsAllBreakpointsExcept([cellWithCellProps], "small", (style) => {
       expect(style.justifyContent).to.equal("flex-start");
-      expect(style.alignSelf).to.equal("flex-start");
+      expect(style.alignItems).to.equal("flex-start");
       expect(style.flexBasis).to.have.string("50%");
     });
 
     testCellsOneBreakpoint([cellWithCellProps], "small", (style) => {
       expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignSelf).to.equal("center");
+      expect(style.alignItems).to.equal("center");
       expect(style.flexBasis).to.have.string("33.333");
     });
 
     // Cells with grid props, excluding small breakpoint
     testCellsAllBreakpointsExcept(cellsWithoutCellProps, "small", (style) => {
       expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignSelf).to.equal("flex-end");
+      expect(style.alignItems).to.equal("flex-end");
       expect(style.flexBasis).to.have.string("25%");
     });
 
     // Cells with small grid breakpoint props
     testCellsOneBreakpoint(cellsWithoutCellProps, "small", (style) => {
       expect(style.justifyContent).to.equal("center");
-      expect(style.alignSelf).to.equal("center");
+      expect(style.alignItems).to.equal("center");
       expect(style.flexBasis).to.have.string("100%");
     });
   });
@@ -320,13 +337,13 @@ describe("components/grid", () => {
 
     testCellsOneBreakpoint([cellWithCellProps], "medium", (style) => {
       expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignSelf).to.equal("flex-end");
+      expect(style.alignItems).to.equal("flex-end");
       expect(style.flexBasis).to.have.string("25%");
     });
 
     testCellsOneBreakpoint(cellsWithoutCellProps, "medium", (style) => {
       expect(style.justifyContent).to.equal("center");
-      expect(style.alignSelf).to.equal("center");
+      expect(style.alignItems).to.equal("center");
       expect(style.flexBasis).to.have.string("100%");
     });
   });
@@ -360,13 +377,13 @@ describe("components/grid", () => {
 
     testCellsAllBreakpoints([cellWithCellProps], (style) => {
       expect(style.justifyContent).to.equal("center");
-      expect(style.alignSelf).to.equal("center");
+      expect(style.alignItems).to.equal("center");
       expect(style.flexBasis).to.have.string("20%");
     });
 
     testCellsAllBreakpoints(cellsWithoutCellProps, (style) => {
       expect(style.justifyContent).to.equal("flex-start");
-      expect(style.alignSelf).to.equal("flex-end");
+      expect(style.alignItems).to.equal("flex-end");
       expect(style.flexBasis).to.have.string("50%");
     });
   });
@@ -400,13 +417,13 @@ describe("components/grid", () => {
 
     testCellsOneBreakpoint([cellWithCellProps], "xlarge", (style) => {
       expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignSelf).to.equal("flex-start");
+      expect(style.alignItems).to.equal("flex-start");
       expect(style.flexBasis).to.have.string("20%");
     });
 
     testCellsAllBreakpoints(cellsWithoutCellProps, (style) => {
       expect(style.justifyContent).to.equal("center");
-      expect(style.alignSelf).to.equal("center");
+      expect(style.alignItems).to.equal("center");
       expect(style.flexBasis).to.have.string("33.333");
     });
   });
@@ -434,7 +451,7 @@ describe("components/grid", () => {
 
     testCellsOneBreakpoint(cells, "large", (style) => {
       expect(style.justifyContent).to.equal("flex-start");
-      expect(style.alignSelf).to.equal("flex-start");
+      expect(style.alignItems).to.equal("flex-start");
       expect(style.flexBasis).to.have.string("100%");
     });
   });
@@ -462,7 +479,7 @@ describe("components/grid", () => {
 
     testCellsAllBreakpoints([cells[0]], (style) => {
       expect(style.justifyContent).to.equal("center");
-      expect(style.alignSelf).to.equal("center");
+      expect(style.alignItems).to.equal("center");
       expect(style.flexBasis).to.have.string("16.666");
     });
   });
@@ -493,19 +510,19 @@ describe("components/grid", () => {
 
     testCellsOneBreakpoint([cells[0]], "small", (style) => {
       expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignSelf).to.equal("center");
+      expect(style.alignItems).to.equal("center");
       expect(style.flexBasis).to.have.string("100%");
     });
 
     testCellsOneBreakpoint([cells[0]], "large", (style) => {
       expect(style.justifyContent).to.equal("center");
-      expect(style.alignSelf).to.equal("flex-end");
+      expect(style.alignItems).to.equal("flex-end");
       expect(style.flexBasis).to.have.string("25%");
     });
 
     testCellsOneBreakpoint([cells[0]], "medium", (style) => {
       expect(style.justifyContent).to.equal("flex-start");
-      expect(style.alignSelf).to.equal("flex-start");
+      expect(style.alignItems).to.equal("flex-start");
       expect(style.flexBasis).to.have.string("33.333");
     });
   });
