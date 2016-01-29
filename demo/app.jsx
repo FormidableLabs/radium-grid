@@ -15,25 +15,26 @@ const colors = {
 };
 
 const App = () => {
+  const { styles } = App;
   return (
     <StyleRoot className="demo">
-      <Style rules={App.styles.global} />
+      <Style rules={styles.global} />
       <h1>Radium Grid Demo</h1>
       <h4>Resize for full effect!</h4>
 
       <h2>Default widths</h2>
       <Grid cellWidth="1/2">
-        <Cell style={[App.styles.cell, App.styles.redCell]}>
-          <p style={App.styles.cellText}>Sensible out-of-the-box sizes!</p>
+        <Cell style={[styles.cell, styles.redCell]}>
+          <p style={styles.cellText}>Sensible out-of-the-box sizes!</p>
         </Cell>
-        <Cell style={[App.styles.cell, App.styles.darkRedCell]}>
-          <p style={App.styles.cellText}>Arbitrary fractions for cell sizes!</p>
+        <Cell style={[styles.cell, styles.darkRedCell]}>
+          <p style={styles.cellText}>ipsum</p>
         </Cell>
-        <Cell style={[App.styles.cell, App.styles.blackCell]}>
-          <p style={App.styles.cellText}>Customizable breakpoints!</p>
+        <Cell style={[styles.cell, styles.blackCell]}>
+          <p style={styles.cellText}>dolor</p>
         </Cell>
-        <Cell style={[App.styles.cell, App.styles.redCell]}>
-          <p style={App.styles.cellText}>Customizable breakpoints!</p>
+        <Cell style={[styles.cell, styles.redCell]}>
+          <p style={styles.cellText}>sit</p>
         </Cell>
       </Grid>
 
@@ -44,23 +45,23 @@ const App = () => {
         mediumCellWidth="1/2"
         smallCellWidth="1"
       >
-        <Cell style={[App.styles.cell, App.styles.redCell]}>
-          <p style={App.styles.cellText}>Sensible out-of-the-box sizes!</p>
+        <Cell style={[styles.cell, styles.redCell]}>
+          <p style={styles.cellText}>Lorem</p>
         </Cell>
-        <Cell style={[App.styles.cell, App.styles.darkRedCell]}>
-          <p style={App.styles.cellText}>Arbitrary fractions for cell sizes!</p>
+        <Cell style={[styles.cell, styles.darkRedCell]}>
+          <p style={styles.cellText}>ipsum</p>
         </Cell>
-        <Cell style={[App.styles.cell, App.styles.blackCell]}>
-          <p style={App.styles.cellText}>Customizable breakpoints!</p>
+        <Cell style={[styles.cell, styles.blackCell]}>
+          <p style={styles.cellText}>dolor</p>
         </Cell>
-        <Cell style={[App.styles.cell, App.styles.redCell]}>
-          <p style={App.styles.cellText}>Customizable breakpoints!</p>
+        <Cell style={[styles.cell, styles.redCell]}>
+          <p style={styles.cellText}>sit</p>
         </Cell>
-        <Cell style={[App.styles.cell, App.styles.darkRedCell]}>
-          <p style={App.styles.cellText}>Arbitrary fractions for cell sizes!</p>
+        <Cell style={[styles.cell, styles.darkRedCell]}>
+          <p style={styles.cellText}>amet</p>
         </Cell>
-        <Cell style={[App.styles.cell, App.styles.blackCell]}>
-          <p style={App.styles.cellText}>Customizable breakpoints!</p>
+        <Cell style={[styles.cell, styles.blackCell]}>
+          <p style={styles.cellText}>consectetuer</p>
         </Cell>
       </Grid>
 
@@ -74,33 +75,33 @@ const App = () => {
         <Cell
           xlargeWidth="1/6"
           largeWidth="2/3"
-          style={[App.styles.cell, App.styles.redCell]}
+          style={[styles.cell, styles.redCell]}
         >
-          <p style={App.styles.cellText}>Sensible out-of-the-box sizes!</p>
+          <p style={styles.cellText}>Lorem</p>
         </Cell>
         <Cell
           xlargeWidth="1/6"
           largeWidth="1/3"
-          style={[App.styles.cell, App.styles.redCell]}
+          style={[styles.cell, styles.redCell]}
         >
-          <p style={App.styles.cellText}>Arbitrary fractions for cell sizes!</p>
+          <p style={styles.cellText}>ipsum</p>
         </Cell>
         <Cell
           xlargeWidth="1/6"
           largeWidth="1/3"
           smallWidth="1/2"
-          style={[App.styles.cell, App.styles.redCell]}
+          style={[styles.cell, styles.redCell]}
         >
-          <p style={App.styles.cellText}>Arbitrary fractions for cell sizes!</p>
+          <p style={styles.cellText}>solor</p>
         </Cell>
         <Cell
           xlargeWidth="1/2"
           largeWidth="2/3"
           mediumWidth="1"
           smallWidth="1/2"
-          style={[App.styles.cell, App.styles.redCell]}
+          style={[styles.cell, styles.redCell]}
         >
-          <p style={App.styles.cellText}>Arbitrary fractions for cell sizes!</p>
+          <p style={styles.cellText}>sit</p>
         </Cell>
       </Grid>
 
@@ -114,17 +115,17 @@ const App = () => {
         cellAlign="right"
         cellVerticalAlign="middle"
       >
-        <Cell style={[App.styles.cell, App.styles.redCell]}>
-          <p style={App.styles.cellText}>Sensible out-of-the-box sizes!</p>
+        <Cell style={[styles.cell, styles.redCell]}>
+          <p style={styles.cellText}>Lorem</p>
         </Cell>
-        <Cell style={[App.styles.cell, App.styles.darkRedCell]}>
-          <p style={App.styles.cellText}>Arbitrary fractions for cell sizes!</p>
+        <Cell style={[styles.cell, styles.darkRedCell]}>
+          <p style={styles.cellText}>ipsum</p>
         </Cell>
-        <Cell style={[App.styles.cell, App.styles.blackCell]}>
-          <p style={App.styles.cellText}>Customizable breakpoints!</p>
+        <Cell style={[styles.cell, styles.blackCell]}>
+          <p style={styles.cellText}>dolor</p>
         </Cell>
-        <Cell style={[App.styles.cell, App.styles.redCell]}>
-          <p style={App.styles.cellText}>Customizable breakpoints!</p>
+        <Cell style={[styles.cell, styles.redCell]}>
+          <p style={styles.cellText}>sit</p>
         </Cell>
       </Grid>
 
@@ -133,14 +134,41 @@ const App = () => {
         cellWidth="1/3"
         gutter="4%"
       >
-        <Cell style={[App.styles.cell, App.styles.redCell]}>
-          <p style={App.styles.cellText}>Sensible out-of-the-box sizes!</p>
+        <Cell style={[styles.cell, styles.redCell]}>
+          <p style={styles.cellText}>Lorem</p>
         </Cell>
-        <Cell style={[App.styles.cell, App.styles.darkRedCell]}>
-          <p style={App.styles.cellText}>Arbitrary fractions for cell sizes!</p>
+        <Cell style={[styles.cell, styles.darkRedCell]}>
+          <p style={styles.cellText}>ipsum</p>
         </Cell>
-        <Cell style={[App.styles.cell, App.styles.blackCell]}>
-          <p style={App.styles.cellText}>Customizable breakpoints!</p>
+        <Cell style={[styles.cell, styles.blackCell]}>
+          <p style={styles.cellText}>dolor</p>
+        </Cell>
+      </Grid>
+
+      <h2>Nested grids</h2>
+      <Grid cellWidth="1/2">
+        <Cell style={[styles.cell, styles.fluidCell, styles.redCell]}>
+          <Grid cellWidth="1/2" smallCellWidth="1">
+            <Cell style={[styles.cell, styles.nestedCell, styles.blackCell]}>
+              <p style={styles.cellText}>Lorem</p>
+            </Cell>
+            <Cell style={[styles.cell, styles.nestedCell, styles.darkRedCell]}>
+              <p style={styles.cellText}>ipsum</p>
+            </Cell>
+          </Grid>
+        </Cell>
+        <Cell style={[styles.cell, styles.fluidCell, styles.darkRedCell]}>
+          <Grid cellWidth="1/3" smallCellWidth="1">
+            <Cell style={[styles.cell, styles.nestedCell, styles.redCell]}>
+              <p style={styles.cellText}>Lorem</p>
+            </Cell>
+            <Cell style={[styles.cell, styles.nestedCell, styles.blackCell]}>
+              <p style={styles.cellText}>ipsum</p>
+            </Cell>
+            <Cell style={[styles.cell, styles.nestedCell, styles.redCell]}>
+              <p style={styles.cellText}>dolor</p>
+            </Cell>
+          </Grid>
         </Cell>
       </Grid>
     </StyleRoot>
@@ -163,6 +191,12 @@ App.styles = {
     padding: "1rem",
     minWidth: "0",
     height: "150px"
+  },
+  fluidCell: {
+    height: "auto"
+  },
+  nestedCell: {
+    marginBottom: 0
   },
   redCell: {
     backgroundColor: colors.shade1
