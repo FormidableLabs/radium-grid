@@ -6,6 +6,7 @@ Radium Grid is a powerful, no-fuss grid system component for React. It combines 
 - Declarative layout using JSX.
 - Uses arbitrary fractions for cell widths. No more 12-column straitjacket!
 - Infers rows from the given cell sizes. No need for explicit rows or extra `<div>`s!
+- Customizable cell alignment, including a hack-free vertical align!
 - Customizable fixed-width and fluid-width gutters. Just pass a CSS unit!
 - Customizable media queries for breakpoint definitions.
 - Uses Radium Style to handle breakpoint changes efficiently.
