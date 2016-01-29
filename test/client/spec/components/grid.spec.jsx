@@ -638,8 +638,4 @@ describe("components/grid", () => {
     expect(cells[0].props.style.backgroundColor).to.equal("blue");
     expect(cells[0].props.style.padding).to.equal("1rem");
   });
-
-  // it("REGRESSION: should not add gutters to full-width cells", () => {
-  //   throw new Error("fail");
-  // });
 });
