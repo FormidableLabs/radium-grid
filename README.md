@@ -4,6 +4,7 @@ Radium Grid is a powerful, no-fuss grid system component for React. It combines 
 
 ## What makes Radium Grid special?
 - Declarative layout using JSX.
+- Sensible defaults.
 - Uses arbitrary fractions for cell widths. No more 12-column straitjacket!
 - Infers rows from the given cell sizes. No need for explicit rows or extra `<div>`s!
 - Customizable cell alignment, including a hack-free vertical align!
@@ -17,6 +18,9 @@ Radium Grid is a powerful, no-fuss grid system component for React. It combines 
   - a single cell for all sizes,
   - a single cell for individual sizes,
   - ...with the lowest props in the tree overriding parent props.
+
+## Prerelease
+Although this is prerelease software, we don't anticipate breaking public API changes.
 
 ## Installation
 `npm install --save radium-grid`
@@ -53,3 +57,138 @@ The above example will render with the following provided defaults:
   - medium: "@media only screen and (min-width: 641px) and (max-width: 1024px)",
   - large: "@media only screen and (min-width: 1025px) and (max-width: 1440px)",
   - xlarge: "@media only screen and (min-width: 1441px)"
+
+To set a default width and alignment for every cell in the grid:
+```es6
+<Grid cellWidth="1/2">
+  <Cell>
+    <p>Lorem</p>
+  </Cell>
+  <Cell>
+    <p>ipsum</p>
+  </Cell>
+</Grid>
+```
+
+An example of setting widths and alignment per screen size for every cell in the grid:
+```es6
+<Grid
+  smallCellWidth="1"
+  smallAlign="right"
+  smallVerticalAlign="bottom"
+  mediumCellWidth="1"
+  mediumCellAlign="right"
+  mediumCellVerticalAlign="bottom"
+>
+  <Cell>
+    <p>Lorem</p>
+  </Cell>
+  <Cell>
+    <p>ipsum</p>
+  </Cell>
+</Grid>
+```
+
+An example of custom per-cell widths and alignments:
+```es6
+<Grid>
+  <Cell
+    align="right"
+    verticalAlign="bottom"
+    width="1/4"
+  >
+    <p>Lorem</p>
+  </Cell>
+  <Cell
+    align="left"
+    verticalAlign="top"
+    width="3/4"
+  >
+    <p>ipsum</p>
+  </Cell>
+  <Cell
+    align="right"
+    verticalAlign="bottom"
+    width="3/4"
+  >
+    <p>dolor</p>
+  </Cell>
+  <Cell
+    align="left"
+    verticalAlign="top"
+    width="1/4"
+  >
+    <p>sit</p>
+  </Cell>
+</Grid>
+```
+
+The same as above, but with different per-cell widths on small screens:
+```es6
+<Grid>
+  <Cell
+    align="right"
+    verticalAlign="bottom"
+    width="1/4"
+    smallWidth="1/2"
+  >
+    <p>Lorem</p>
+  </Cell>
+  <Cell
+    align="left"
+    verticalAlign="top"
+    width="3/4"
+    smallWidth="1/2"
+  >
+    <p>ipsum</p>
+  </Cell>
+</Grid>
+```
+
+Custom gutters can use any valid CSS value string. Percentage values create fluid gutters, while all other values create fixed gutters. Example:
+
+```es6
+<Grid gutter="24px">
+  <Cell>
+    <p>Lorem</p>
+  </Cell>
+  <Cell>
+    <p>ipsum</p>
+  </Cell>
+</Grid>
+
+<Grid gutter="4%">
+  <Cell>
+    <p>Lorem</p>
+  </Cell>
+  <Cell>
+    <p>ipsum</p>
+  </Cell>
+</Grid>
+```
+
+While we recommend the default breakpoints, you can customize them:
+```es6
+const breakpoints = {
+  small: "@media only screen and (max-width: 320px)",
+  medium: "@media only screen and (min-width: 320px) and (max-width: 640px)",
+  large: "@media only screen and (min-width: 641px) and (max-width: 1024px)",
+  xlarge: "@media only screen and (min-width: 1025px)"
+}
+<Grid breakpoints={breakpoints}>
+  <Cell>
+    <p>Lorem</p>
+  </Cell>
+  <Cell>
+    <p>ipsum</p>
+  </Cell>
+</Grid>
+```
+
+## Demo
+There's more complex examples on the demo page. Check out the code in [app.jsx](https://github.com/FormidableLabls/radium-grid/blob/master/demo/app.jsx).
+
+### Installation
+- Install builder: `npm install -g builder`
+- Clone this repo
+- `npm install` and then `builder run hot` will load a webpack dev server at localhost:3000
