@@ -39,7 +39,7 @@ const App = () => {
 
       <h2>Default widths per screen size</h2>
       <Grid
-        xlargeCellWidth="1/4"
+        xlargeCellWidth="1/3"
         largeCellWidth="1/3"
         mediumCellWidth="1/2"
         smallCellWidth="1"
@@ -72,18 +72,21 @@ const App = () => {
         smallCellWidth="1"
       >
         <Cell
+          xlargeWidth="1/6"
           largeWidth="2/3"
           style={[App.styles.cell, App.styles.redCell]}
         >
           <p style={App.styles.cellText}>Sensible out-of-the-box sizes!</p>
         </Cell>
         <Cell
+          xlargeWidth="1/6"
           largeWidth="1/3"
           style={[App.styles.cell, App.styles.redCell]}
         >
           <p style={App.styles.cellText}>Arbitrary fractions for cell sizes!</p>
         </Cell>
         <Cell
+          xlargeWidth="1/6"
           largeWidth="1/3"
           smallWidth="1/2"
           style={[App.styles.cell, App.styles.redCell]}
@@ -91,6 +94,7 @@ const App = () => {
           <p style={App.styles.cellText}>Arbitrary fractions for cell sizes!</p>
         </Cell>
         <Cell
+          xlargeWidth="1/2"
           largeWidth="2/3"
           mediumWidth="1"
           smallWidth="1/2"
