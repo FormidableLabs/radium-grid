@@ -16,3 +16,39 @@ Radium Grid is a powerful, no-fuss grid system component for React. It combines 
   - a single cell for all sizes,
   - a single cell for individual sizes,
   - ...with the lowest props in the tree overriding parent props.
+
+## Installation
+`npm install --save radium-grid`
+
+## Usage
+```es6
+import { Grid, Cell } from 'radium-grid';
+
+const App = () => {
+  return (
+    <Grid>
+      <Cell>
+        <p>Lorem</p>
+      </Cell>
+      <Cell>
+        <p>ipsum</p>
+      </Cell>
+      <Cell>
+        <p>dolor</p>
+      </Cell>
+      <Cell>
+        <p>sit</p>
+      </Cell>
+    </Grid>
+  );
+}
+```
+The above example will render with the following provided defaults:
+- All cells in the grid are 1/3 wide for all screen sizes.
+- The grid uses a 16px fixed gutter.
+- Cell content is aligned to the top left.
+- The breakpoints use the following media queries:
+  - small: "@media only screen and (max-width: 640px)",
+  - medium: "@media only screen and (min-width: 641px) and (max-width: 1024px)",
+  - large: "@media only screen and (min-width: 1025px) and (max-width: 1440px)",
+  - xlarge: "@media only screen and (min-width: 1441px)"
