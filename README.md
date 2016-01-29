@@ -186,7 +186,7 @@ const breakpoints = {
 ```
 
 ## Demo
-There's more complex examples on the demo page. Check out the code in [app.jsx](https://github.com/FormidableLabs/radium-grid/blob/master/demo/app.jsx).
+There are more complex examples on the demo page. Check out the code in [app.jsx](https://github.com/FormidableLabs/radium-grid/blob/master/demo/app.jsx).
 
 ### Installation
 - Install builder: `npm install -g builder`
