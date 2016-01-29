@@ -25,7 +25,7 @@ const App = () => {
       <h2>Default widths</h2>
       <Grid cellWidth="1/2">
         <Cell style={[styles.cell, styles.redCell]}>
-          <p style={styles.cellText}>Sensible out-of-the-box sizes!</p>
+          <p style={styles.cellText}>Lorem</p>
         </Cell>
         <Cell style={[styles.cell, styles.darkRedCell]}>
           <p style={styles.cellText}>ipsum</p>
@@ -105,7 +105,7 @@ const App = () => {
         </Cell>
       </Grid>
 
-      <h2>Custom fixed gutters</h2>
+      <h2>Custom fixed gutters and per-grid custom alignments</h2>
       <Grid
         xlargeCellWidth="1/4"
         largeCellWidth="1/4"
@@ -129,15 +129,23 @@ const App = () => {
         </Cell>
       </Grid>
 
-      <h2>Custom fluid gutters</h2>
+      <h2>Custom fluid gutters and per-cell custom alignments</h2>
       <Grid
         cellWidth="1/3"
         gutter="4%"
       >
-        <Cell style={[styles.cell, styles.redCell]}>
+        <Cell
+          align="right"
+          verticalAlign="bottom"
+          style={[styles.cell, styles.redCell]}
+        >
           <p style={styles.cellText}>Lorem</p>
         </Cell>
-        <Cell style={[styles.cell, styles.darkRedCell]}>
+        <Cell
+          align="center"
+          verticalAlign="center"
+          style={[styles.cell, styles.darkRedCell]}
+        >
           <p style={styles.cellText}>ipsum</p>
         </Cell>
         <Cell style={[styles.cell, styles.blackCell]}>
