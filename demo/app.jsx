@@ -107,7 +107,7 @@ const App = () => {
       <h2>Custom fixed gutters</h2>
       <Grid
         xlargeCellWidth="1/4"
-        largeCellWidth="1/3"
+        largeCellWidth="1/4"
         mediumCellWidth="1/2"
         smallCellWidth="1"
         gutter="24px"
