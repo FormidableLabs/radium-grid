@@ -1,5 +1,4 @@
 import React, { Children } from "react";
-import merge from "lodash.merge";
 import resolveCellDefaults from "./resolve-cell-defaults";
 import resolveColumnCounts from "./resolve-column-counts";
 import resolveCellStyles from "./resolve-cell-styles";
@@ -10,8 +9,8 @@ const resolveCells = (props) => {
   const childrenWithDefaults = Children.map(
     props.children, (child) => {
       return React.cloneElement(child, resolveCellDefaults(
-        merge({}, childProps, child.props)
-      ));
+        {...childProps, ...child.props})
+      );
     }
   );
 
