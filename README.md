@@ -20,7 +20,7 @@ Radium Grid is a powerful, no-fuss grid system component for React. It combines 
   - ...with the lowest props in the tree overriding parent props.
 
 ## Prerelease
-Although this is prerelease software, we don't anticipate breaking public API changes.
+Although this is prerelease software, we'll do our best to avoid breaking public API changes.
 
 ## Installation
 `npm install --save radium-grid`
