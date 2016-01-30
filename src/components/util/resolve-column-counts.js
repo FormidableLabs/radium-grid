@@ -20,40 +20,40 @@ const resolveColumnCounts = ({ children, breakpoints }) => {
   // The indices of the final array align with the
   // indices of the child cell array.
   const columnCounts = Object.keys(breakpoints)
-  .reduce((all, breakpoint) => {
-    const mediaQuery = breakpoints[breakpoint];
-    return {
-      ...all,
-      [mediaQuery]: children.reduce((acc, cell) => {
-        const breakpointCell = cell.props[mediaQuery];
+    .reduce((all, breakpoint) => {
+      const mediaQuery = breakpoints[breakpoint];
+      return {
+        ...all,
+        [mediaQuery]: children.reduce((acc, cell) => {
+          const breakpointCell = cell.props[mediaQuery];
 
-        // On the first fold, add a new subarray
-        // with the first cell props.
-        if (!acc.length) {
-          return [[breakpointCell]];
-        }
+          // On the first fold, add a new subarray
+          // with the first cell props.
+          if (!acc.length) {
+            return [[breakpointCell]];
+          }
 
-        const rest = initial(acc);
-        const row = last(acc);
+          const rest = initial(acc);
+          const row = last(acc);
 
-        // If the sum of the current and previous
-        // cells is gte 1, leave the current
-        // subarray and start a new one with
-        // the current cell
-        const sum = row
-          .map((column) => Fraction(column.width))
-          .reduce((previous, width) => previous.add(width))
-          .valueOf();
-        if (sum >= 1) {
-          return [...acc, [breakpointCell]];
-        }
+          // If the sum of the current and previous
+          // cells is gte 1, leave the current
+          // subarray and start a new one with
+          // the current cell
+          const sum = row
+            .map((column) => Fraction(column.width))
+            .reduce((previous, width) => previous.add(width))
+            .valueOf();
+          if (sum >= 1) {
+            return [...acc, [breakpointCell]];
+          }
 
-        return [...rest, [...row, breakpointCell]];
-      }, [])
-      .map((row) => row.map(() => row.length))
-      .reduce((acc, row) => acc.concat(row))
-    };
-  }, {});
+          return [...rest, [...row, breakpointCell]];
+        }, [])
+        .map((row) => row.map(() => row.length))
+        .reduce((acc, row) => acc.concat(row))
+      };
+    }, {});
 
   // Add the column counts to the cell props.
   return Children.map(children, (cell, index) => {
