@@ -1,4 +1,8 @@
-import merge from "lodash.merge";
+const prune = (object) => {
+  return Object.keys(object).reduce((acc, key) => {
+    return object[key] === undefined ? acc : {...acc, [key]: object[key]};
+  }, {});
+};
 
 const resolveCellDefaults = (props) => {
   const gridDefault = {
@@ -45,12 +49,12 @@ const resolveCellDefaults = (props) => {
     // - Grid breakpoint default
     // - Cell default
     // - Cell breakpoint default
-    const cellConfig = merge({},
-      gridDefault,
-      gridBreakpointDefault,
-      cellDefault,
-      cellBreakpointDefault
-    );
+    const cellConfig = {
+      ...prune(gridDefault),
+      ...prune(gridBreakpointDefault),
+      ...prune(cellDefault),
+      ...prune(cellBreakpointDefault)
+    };
 
     return {...acc, [mediaQuery]: cellConfig};
   }, {});
