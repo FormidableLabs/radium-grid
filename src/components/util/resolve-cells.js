@@ -26,9 +26,9 @@ const resolveCells = (props) => {
 
   // Resolve the final cell styles
   return Children.map(childrenWithColumnCounts, (child) => {
-    return React.cloneElement(child, merge({}, {
+    return React.cloneElement(child, {
       style: resolveCellStyles(child.props)
-    }));
+    });
   });
 };
 
