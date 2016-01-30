@@ -1,5 +1,4 @@
 import React, { Children } from "react";
-import omit from "lodash.omit";
 import merge from "lodash.merge";
 import resolveCellDefaults from "./resolve-cell-defaults";
 import resolveColumnCounts from "./resolve-column-counts";
@@ -7,14 +6,12 @@ import resolveCellStyles from "./resolve-cell-styles";
 
 const resolveCells = (props) => {
   // Resolve the final style defaults for each cell
-  const childProps = omit(props, ["children", "style"]);
+  const {children, style, ...childProps } = props; // eslint-disable-line no-unused-vars
   const childrenWithDefaults = Children.map(
     props.children, (child) => {
-      return React.cloneElement(
-        child, resolveCellDefaults(
-          merge({}, childProps, child.props)
-        )
-      );
+      return React.cloneElement(child, resolveCellDefaults(
+        merge({}, childProps, child.props)
+      ));
     }
   );
 
