@@ -143,7 +143,7 @@ const App = () => {
         </Cell>
         <Cell
           align="center"
-          verticalAlign="center"
+          verticalAlign="middle"
           style={[styles.cell, styles.darkRedCell]}
         >
           <p style={styles.cellText}>ipsum</p>
