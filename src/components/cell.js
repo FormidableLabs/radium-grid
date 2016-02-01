@@ -1,13 +1,10 @@
 /* eslint-disable new-cap */
 import React, { PropTypes } from "react";
 import Radium from "radium";
-import resolveCellStyles from "./util/resolve-cell-styles";
 
 const Cell = (props) => {
-  const styles = resolveCellStyles(props);
-
   return (
-    <div style={styles}>
+    <div style={props.style}>
       {props.children}
     </div>
   );
@@ -16,28 +13,30 @@ const Cell = (props) => {
 const horizontalPropType = PropTypes.oneOf(["left", "center", "right"]);
 const verticalPropType = PropTypes.oneOf(["top", "middle", "bottom"]);
 Cell.propTypes = {
-  width: PropTypes.number,
+  width: PropTypes.string,
   horizontalAlign: horizontalPropType,
   verticalAlign: verticalPropType,
 
-  smallWidth: PropTypes.number,
+  smallWidth: PropTypes.string,
   smallHorizontalAlign: horizontalPropType,
   smallVerticalAlign: verticalPropType,
 
-  mediumWidth: PropTypes.number,
+  mediumWidth: PropTypes.string,
   mediumHorizontalAlign: horizontalPropType,
   mediumVerticalAlign: verticalPropType,
 
-  largeWidth: PropTypes.number,
+  largeWidth: PropTypes.string,
   largeHorizontalAlign: horizontalPropType,
   largeVerticalAlign: verticalPropType,
 
-  xlargeWidth: PropTypes.number,
+  xlargeWidth: PropTypes.string,
   xlargeHorizontalAlign: horizontalPropType,
   xlargeVerticalAlign: verticalPropType,
 
   order: PropTypes.number,
-  children: React.PropTypes.node
+
+  children: PropTypes.node,
+  style: PropTypes.object
 };
 
 export default Radium(Cell);

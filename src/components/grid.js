@@ -1,7 +1,7 @@
 /* eslint-disable new-cap */
-import React, { Children, PropTypes } from "react";
+import React, { PropTypes } from "react";
 import Radium from "radium";
-import omit from "lodash.omit";
+import resolveCells from "./util/resolve-cells";
 
 const Grid = (props) => {
   const styles = {
@@ -9,41 +9,35 @@ const Grid = (props) => {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    width: "100%"
   };
-
-  const childProps = omit(props, ["children", "style"]);
-  const childrenWithProps = Children.map(
-    props.children, (child) => {
-      return React.cloneElement(child, childProps);
-    }
-  );
 
   return (
     <div style={styles}>
-      {childrenWithProps}
+      {resolveCells(props)}
     </div>
   );
 };
 
 Grid.propTypes = {
-  cellWidth: PropTypes.number,
+  cellWidth: PropTypes.string,
   cellAlign: PropTypes.string,
   cellVerticalAlign: PropTypes.string,
 
-  smallCellWidth: PropTypes.number,
+  smallCellWidth: PropTypes.string,
   smallCellAlign: PropTypes.string,
   smallCellVerticalAlign: PropTypes.string,
 
-  mediumCellWidth: PropTypes.number,
+  mediumCellWidth: PropTypes.string,
   mediumCellAlign: PropTypes.string,
   mediumCellVerticalAlign: PropTypes.string,
 
-  largeCellWidth: PropTypes.number,
+  largeCellWidth: PropTypes.string,
   largeCellAlign: PropTypes.string,
   largeCellVerticalAlign: PropTypes.string,
 
-  xlargeCellWidth: PropTypes.number,
+  xlargeCellWidth: PropTypes.string,
   xlargeCellAlign: PropTypes.string,
   xlargeCellVerticalAlign: PropTypes.string,
 
@@ -61,7 +55,7 @@ Grid.propTypes = {
 };
 
 Grid.defaultProps = {
-  cellWidth: 1 / 3, // eslint-disable-line no-magic-numbers
+  cellWidth: "1/3",
   cellAlign: "left",
   cellVerticalAlign: "top",
 
