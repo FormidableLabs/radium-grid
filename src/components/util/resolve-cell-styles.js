@@ -1,6 +1,6 @@
 /* eslint-disable no-magic-numbers */
 import { mergeStyles } from "radium/lib/merge-styles";
-import Fraction from "fraction.js";
+import parseFraction from "./parse-fraction";
 
 const parseUnit = (value) => {
   // http://stackoverflow.com/questions/2868947/split1px-into-1px-1-px-in-javascript
@@ -18,13 +18,13 @@ const resolveCellFlexBasis = ({ width, gutter, columnCount }) => {
   const MULTIPLIER = 100;
 
   // Full-width cells have no gutter
-  if (width.d === 1) {
+  if (width === 1) {
     return "100%";
   }
 
   const finalGutter = resolveCellGutter({ gutter, columnCount });
 
-  return `calc(${width.valueOf() * MULTIPLIER}% - ${finalGutter})`;
+  return `calc(${width * MULTIPLIER}% - ${finalGutter})`;
 };
 
 // Merge Radium style arrays and leave
@@ -58,7 +58,7 @@ const resolveCellStyles = (props) => {
       [mediaQuery]: {
         display: "flex",
         flexBasis: resolveCellFlexBasis({
-          width: new Fraction(breakpointStyles.width),
+          width: parseFraction(breakpointStyles.width),
           gutter: breakpointStyles.gutter,
           columnCount: breakpointStyles.columnCount
         }),

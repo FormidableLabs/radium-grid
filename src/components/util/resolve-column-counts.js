@@ -3,7 +3,7 @@ import React, { Children } from "react";
 
 import initial from "lodash.initial";
 import last from "lodash.last";
-import Fraction from "fraction.js";
+import parseFraction from "./parse-fraction";
 
 const resolveColumnCounts = ({ children, breakpoints }) => {
   // Create an array of column counts that matches
@@ -41,9 +41,8 @@ const resolveColumnCounts = ({ children, breakpoints }) => {
           // subarray and start a new one with
           // the current cell
           const sum = row
-            .map((column) => Fraction(column.width))
-            .reduce((previous, width) => previous.add(width))
-            .valueOf();
+            .map((column) => parseFraction(column.width))
+            .reduce((previous, width) => previous + width);
           if (sum >= 1) {
             return [...acc, [breakpointCell]];
           }
