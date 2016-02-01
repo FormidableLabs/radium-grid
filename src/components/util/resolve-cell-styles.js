@@ -67,7 +67,7 @@ const resolveCellStyles = (props) => {
         order: breakpointStyles.order ? breakpointStyles.order : "initial"
       }
     };
-  }, { ...resolvePropStyles(props.style) });
+  }, resolvePropStyles(props.style));
 };
 
 export default resolveCellStyles;
