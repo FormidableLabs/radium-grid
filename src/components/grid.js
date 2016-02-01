@@ -10,7 +10,7 @@ const Grid = (props) => {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    width: "100%"
+    minWidth: "100%"
   };
 
   return (
