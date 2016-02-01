@@ -101,7 +101,7 @@ describe("components/grid", () => {
     );
     const cells = resolveCells(grid.props);
     testCellsAllBreakpoints(cells, (style) => {
-      expect(style.display).to.equal("flex");
+      expect(style).to.have.deep.property("display", "flex");
     });
   });
 
@@ -119,9 +119,9 @@ describe("components/grid", () => {
     const cells = resolveCells(grid.props);
 
     testCellsAllBreakpoints(cells, (style) => {
-      expect(style.justifyContent).to.equal("flex-start");
-      expect(style.alignItems).to.equal("flex-start");
-      expect(style.flexBasis).to.have.string("33.333");
+      expect(style).to.have.deep.property("justifyContent", "flex-start");
+      expect(style).to.have.deep.property("alignItems", "flex-start");
+      expect(style).to.have.deep.property("flexBasis").with.string("33.333");
     });
   });
 
@@ -143,9 +143,9 @@ describe("components/grid", () => {
     );
     const cells = resolveCells(grid.props);
     testCellsAllBreakpoints(cells, (style) => {
-      expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignItems).to.equal("flex-end");
-      expect(style.flexBasis).to.have.string("25");
+      expect(style).to.have.deep.property("justifyContent", "flex-end");
+      expect(style).to.have.deep.property("alignItems", "flex-end");
+      expect(style).to.have.deep.property("flexBasis").with.string("25");
     });
   });
 
@@ -172,16 +172,16 @@ describe("components/grid", () => {
     const cells = resolveCells(grid.props);
 
     testCellsAllBreakpointsExcept(cells, "small", (style) => {
-      expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignItems).to.equal("flex-end");
-      expect(style.flexBasis).to.have.string("25");
+      expect(style).to.have.deep.property("justifyContent", "flex-end");
+      expect(style).to.have.deep.property("alignItems", "flex-end");
+      expect(style).to.have.deep.property("flexBasis").with.string("25");
     });
 
     // Check only small breakpoints on all cells
     testCellsOneBreakpoint(cells, "small", (style) => {
-      expect(style.justifyContent).to.equal("center");
-      expect(style.alignItems).to.equal("center");
-      expect(style.flexBasis).to.have.string("100%");
+      expect(style).to.have.deep.property("justifyContent", "center");
+      expect(style).to.have.deep.property("alignItems", "center");
+      expect(style).to.have.deep.property("flexBasis").with.string("100%");
     });
   });
 
@@ -217,23 +217,23 @@ describe("components/grid", () => {
     const [cellWithCellProps, ...cellsWithoutCellProps] = cells;
 
     testCellsAllBreakpoints([cellWithCellProps], (style) => {
-      expect(style.justifyContent).to.equal("flex-start");
-      expect(style.alignItems).to.equal("flex-start");
-      expect(style.flexBasis).to.have.string("50%");
+      expect(style).to.have.deep.property("justifyContent", "flex-start");
+      expect(style).to.have.deep.property("alignItems", "flex-start");
+      expect(style).to.have.deep.property("flexBasis").with.string("50%");
     });
 
     // Cells with grid props, excluding small breakpoint
     testCellsAllBreakpointsExcept(cellsWithoutCellProps, "small", (style) => {
-      expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignItems).to.equal("flex-end");
-      expect(style.flexBasis).to.have.string("25%");
+      expect(style).to.have.deep.property("justifyContent", "flex-end");
+      expect(style).to.have.deep.property("alignItems", "flex-end");
+      expect(style).to.have.deep.property("flexBasis").with.string("25%");
     });
 
     // Cells with small grid breakpoint props
     testCellsOneBreakpoint(cellsWithoutCellProps, "small", (style) => {
-      expect(style.justifyContent).to.equal("center");
-      expect(style.alignItems).to.equal("center");
-      expect(style.flexBasis).to.have.string("100%");
+      expect(style).to.have.deep.property("justifyContent", "center");
+      expect(style).to.have.deep.property("alignItems", "center");
+      expect(style).to.have.deep.property("flexBasis").with.string("100%");
     });
   });
 
@@ -274,29 +274,29 @@ describe("components/grid", () => {
     const [cellWithCellProps, ...cellsWithoutCellProps] = cells;
 
     testCellsAllBreakpointsExcept([cellWithCellProps], "small", (style) => {
-      expect(style.justifyContent).to.equal("flex-start");
-      expect(style.alignItems).to.equal("flex-start");
-      expect(style.flexBasis).to.have.string("50%");
+      expect(style).to.have.deep.property("justifyContent", "flex-start");
+      expect(style).to.have.deep.property("alignItems", "flex-start");
+      expect(style).to.have.deep.property("flexBasis").with.string("50%");
     });
 
     testCellsOneBreakpoint([cellWithCellProps], "small", (style) => {
-      expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignItems).to.equal("center");
-      expect(style.flexBasis).to.have.string("33.333");
+      expect(style).to.have.deep.property("justifyContent", "flex-end");
+      expect(style).to.have.deep.property("alignItems", "center");
+      expect(style).to.have.deep.property("flexBasis").with.string("33.333");
     });
 
     // Cells with grid props, excluding small breakpoint
     testCellsAllBreakpointsExcept(cellsWithoutCellProps, "small", (style) => {
-      expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignItems).to.equal("flex-end");
-      expect(style.flexBasis).to.have.string("25%");
+      expect(style).to.have.deep.property("justifyContent", "flex-end");
+      expect(style).to.have.deep.property("alignItems", "flex-end");
+      expect(style).to.have.deep.property("flexBasis").with.string("25%");
     });
 
     // Cells with small grid breakpoint props
     testCellsOneBreakpoint(cellsWithoutCellProps, "small", (style) => {
-      expect(style.justifyContent).to.equal("center");
-      expect(style.alignItems).to.equal("center");
-      expect(style.flexBasis).to.have.string("100%");
+      expect(style).to.have.deep.property("justifyContent", "center");
+      expect(style).to.have.deep.property("alignItems", "center");
+      expect(style).to.have.deep.property("flexBasis").with.string("100%");
     });
   });
 
@@ -336,15 +336,15 @@ describe("components/grid", () => {
     const [cellWithCellProps, ...cellsWithoutCellProps] = cells;
 
     testCellsOneBreakpoint([cellWithCellProps], "medium", (style) => {
-      expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignItems).to.equal("flex-end");
-      expect(style.flexBasis).to.have.string("25%");
+      expect(style).to.have.deep.property("justifyContent", "flex-end");
+      expect(style).to.have.deep.property("alignItems", "flex-end");
+      expect(style).to.have.deep.property("flexBasis").with.string("25%");
     });
 
     testCellsOneBreakpoint(cellsWithoutCellProps, "medium", (style) => {
-      expect(style.justifyContent).to.equal("center");
-      expect(style.alignItems).to.equal("center");
-      expect(style.flexBasis).to.have.string("100%");
+      expect(style).to.have.deep.property("justifyContent", "center");
+      expect(style).to.have.deep.property("alignItems", "center");
+      expect(style).to.have.deep.property("flexBasis").with.string("100%");
     });
   });
 
@@ -376,15 +376,15 @@ describe("components/grid", () => {
     const [cellWithCellProps, ...cellsWithoutCellProps] = cells;
 
     testCellsAllBreakpoints([cellWithCellProps], (style) => {
-      expect(style.justifyContent).to.equal("center");
-      expect(style.alignItems).to.equal("center");
-      expect(style.flexBasis).to.have.string("20%");
+      expect(style).to.have.deep.property("justifyContent", "center");
+      expect(style).to.have.deep.property("alignItems", "center");
+      expect(style).to.have.deep.property("flexBasis").with.string("20%");
     });
 
     testCellsAllBreakpoints(cellsWithoutCellProps, (style) => {
-      expect(style.justifyContent).to.equal("flex-start");
-      expect(style.alignItems).to.equal("flex-end");
-      expect(style.flexBasis).to.have.string("50%");
+      expect(style).to.have.deep.property("justifyContent", "flex-start");
+      expect(style).to.have.deep.property("alignItems", "flex-end");
+      expect(style).to.have.deep.property("flexBasis").with.string("50%");
     });
   });
 
@@ -416,15 +416,15 @@ describe("components/grid", () => {
     const [cellWithCellProps, ...cellsWithoutCellProps] = cells;
 
     testCellsOneBreakpoint([cellWithCellProps], "xlarge", (style) => {
-      expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignItems).to.equal("flex-start");
-      expect(style.flexBasis).to.have.string("20%");
+      expect(style).to.have.deep.property("justifyContent", "flex-end");
+      expect(style).to.have.deep.property("alignItems", "flex-start");
+      expect(style).to.have.deep.property("flexBasis").with.string("20%");
     });
 
     testCellsAllBreakpoints(cellsWithoutCellProps, (style) => {
-      expect(style.justifyContent).to.equal("center");
-      expect(style.alignItems).to.equal("center");
-      expect(style.flexBasis).to.have.string("33.333");
+      expect(style).to.have.deep.property("justifyContent", "center");
+      expect(style).to.have.deep.property("alignItems", "center");
+      expect(style).to.have.deep.property("flexBasis").with.string("33.333");
     });
   });
 
@@ -450,9 +450,9 @@ describe("components/grid", () => {
     const cells = resolveCells(grid.props);
 
     testCellsOneBreakpoint(cells, "large", (style) => {
-      expect(style.justifyContent).to.equal("flex-start");
-      expect(style.alignItems).to.equal("flex-start");
-      expect(style.flexBasis).to.have.string("100%");
+      expect(style).to.have.deep.property("justifyContent", "flex-start");
+      expect(style).to.have.deep.property("alignItems", "flex-start");
+      expect(style).to.have.deep.property("flexBasis").with.string("100%");
     });
   });
 
@@ -478,9 +478,9 @@ describe("components/grid", () => {
     const cells = resolveCells(grid.props);
 
     testCellsAllBreakpoints([cells[0]], (style) => {
-      expect(style.justifyContent).to.equal("center");
-      expect(style.alignItems).to.equal("center");
-      expect(style.flexBasis).to.have.string("16.666");
+      expect(style).to.have.deep.property("justifyContent", "center");
+      expect(style).to.have.deep.property("alignItems", "center");
+      expect(style).to.have.deep.property("flexBasis").with.string("16.666");
     });
   });
 
@@ -509,21 +509,21 @@ describe("components/grid", () => {
     const cells = resolveCells(grid.props);
 
     testCellsOneBreakpoint([cells[0]], "small", (style) => {
-      expect(style.justifyContent).to.equal("flex-end");
-      expect(style.alignItems).to.equal("center");
-      expect(style.flexBasis).to.have.string("100%");
+      expect(style).to.have.deep.property("justifyContent", "flex-end");
+      expect(style).to.have.deep.property("alignItems", "center");
+      expect(style).to.have.deep.property("flexBasis").with.string("100%");
     });
 
     testCellsOneBreakpoint([cells[0]], "large", (style) => {
-      expect(style.justifyContent).to.equal("center");
-      expect(style.alignItems).to.equal("flex-end");
-      expect(style.flexBasis).to.have.string("25%");
+      expect(style).to.have.deep.property("justifyContent", "center");
+      expect(style).to.have.deep.property("alignItems", "flex-end");
+      expect(style).to.have.deep.property("flexBasis").with.string("25%");
     });
 
     testCellsOneBreakpoint([cells[0]], "medium", (style) => {
-      expect(style.justifyContent).to.equal("flex-start");
-      expect(style.alignItems).to.equal("flex-start");
-      expect(style.flexBasis).to.have.string("33.333");
+      expect(style).to.have.deep.property("justifyContent", "flex-start");
+      expect(style).to.have.deep.property("alignItems", "flex-start");
+      expect(style).to.have.deep.property("flexBasis").with.string("33.333");
     });
   });
 
@@ -544,7 +544,7 @@ describe("components/grid", () => {
     const cells = resolveCells(grid.props);
 
     testCellsAllBreakpoints([cells[1]], (style) => {
-      expect(style.order).to.equal(1);
+      expect(style.order).to.deep.equal(1);
     });
   });
 
@@ -566,8 +566,8 @@ describe("components/grid", () => {
     const cells = resolveCells(grid.props);
 
     testCellsAllBreakpoints(cells, (style) => {
-      expect(style.flexBasis).to.have.string("calc(33.333");
-      expect(style.flexBasis).to.have.string("- 16px");
+      expect(style).to.have.deep.property("flexBasis").with.string("calc(33.333");
+      expect(style).to.have.deep.property("flexBasis").with.string("- 16px");
     });
   });
 
@@ -589,10 +589,10 @@ describe("components/grid", () => {
     const cells = resolveCells(grid.props);
 
     testCellsAllBreakpoints(cells, (style) => {
-      expect(style.flexBasis).to.have.string("calc(33.333");
+      expect(style).to.have.deep.property("flexBasis").with.string("calc(33.333");
 
       // TODO: this is a magic number. Write tests for gutter calcs
-      expect(style.flexBasis).to.have.string("- 1.3333");
+      expect(style).to.have.deep.property("flexBasis").with.string("- 1.3333");
     });
   });
 
@@ -612,7 +612,7 @@ describe("components/grid", () => {
       </Grid>
     );
     const cells = resolveCells(grid.props);
-    expect(cells[0].props.style.backgroundColor).to.equal("blue");
+    expect(cells).to.have.deep.property("[0].props.style.backgroundColor", "blue");
   });
 
   it("should apply custom props Radium style arrays", () => {
@@ -635,7 +635,7 @@ describe("components/grid", () => {
       </Grid>
     );
     const cells = resolveCells(grid.props);
-    expect(cells[0].props.style.backgroundColor).to.equal("blue");
-    expect(cells[0].props.style.padding).to.equal("1rem");
+    expect(cells).to.have.deep.property("[0].props.style.backgroundColor", "blue");
+    expect(cells).to.have.deep.property("[0].props.style.padding", "1rem");
   });
 });
