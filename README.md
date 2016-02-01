@@ -1,4 +1,4 @@
-# Radium Grid
+# Radium Grid [![Build Status](https://travis-ci.org/FormidableLabs/radium-grid.svg?branch=master)](https://travis-ci.org/FormidableLabs/radium-grid) [![Coverage Status](https://coveralls.io/repos/github/FormidableLabs/radium-grid/badge.svg?branch=master)](https://coveralls.io/github/FormidableLabs/radium-grid?branch=master)
 
 Radium Grid is a powerful, no-fuss grid system component for React. It combines the best decisions from the ecosystem of (S)CSS-based grid systems and implements them hack-free on top of Flexbox.
 
