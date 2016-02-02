@@ -1,4 +1,5 @@
 /* eslint-disable no-magic-numbers */
+import merge from "lodash.merge";
 import { mergeStyles } from "radium/lib/merge-styles";
 import parseFraction from "./parse-fraction";
 
@@ -50,7 +51,7 @@ const resolveCellStyles = (props) => {
   const mediaQueries = Object.keys(props)
     .filter((key) => key.indexOf("@media") !== -1);
 
-  return mediaQueries.reduce((acc, mediaQuery) => {
+  const cellStyle = mediaQueries.reduce((acc, mediaQuery) => {
     const breakpointStyles = props[mediaQuery];
 
     return {
@@ -67,7 +68,14 @@ const resolveCellStyles = (props) => {
         order: breakpointStyles.order ? breakpointStyles.order : "initial"
       }
     };
-  }, resolvePropStyles(props.style));
+  }, {});
+
+  // Deep merge here so that custom media query
+  // styles don't get obliterated by the defaults
+  return merge(
+    cellStyle,
+    resolvePropStyles(props.style)
+  );
 };
 
 export default resolveCellStyles;

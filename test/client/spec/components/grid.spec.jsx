@@ -677,4 +677,38 @@ describe("components/grid", () => {
     expect(styles).to.have.string("min-width:50%");
     expect(styles).not.to.have.string("min-width:100%");
   });
+
+  // Regression: don't obliterate custom styles
+  // with Radium media query keys
+  it("should allow custom styles with Radium media query keys", () => {
+    const grid = (
+      <Grid style={{minWidth: "50%"}}>
+        <Cell style=
+          {[
+            {backgroundColor: "blue"},
+            {padding: "1rem"},
+            {
+              [Grid.defaultProps.breakpoints.small]: {
+                backgroundColor: "red"
+              }
+            }
+          ]}
+        >
+          <p>testing</p>
+        </Cell>
+        <Cell>
+          <p>testing!</p>
+        </Cell>
+        <Cell>
+          <p>testing?</p>
+        </Cell>
+      </Grid>
+    );
+    const cells = resolveCells(grid.props);
+    const smallStyle = cells[0].props.style[
+      Grid.defaultProps.breakpoints.small
+    ];
+    expect(smallStyle).to.have.deep.property("display", "flex");
+    expect(smallStyle).to.have.deep.property("backgroundColor", "red");
+  });
 });
