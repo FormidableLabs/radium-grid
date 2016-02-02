@@ -1,7 +1,12 @@
+/* eslint-disable new-cap */
+
 // Help PhantomJS out
 require("babel-polyfill");
 
 import React from "react";
+import ReactDOM from "react-dom";
+import Radium, { StyleRoot } from "radium";
+import TestUtils from "react-addons-test-utils";
 import { Grid, Cell } from "../../../../src/index";
 import resolveCells from "../../../../src/components/util/resolve-cells";
 
@@ -596,7 +601,6 @@ describe("components/grid", () => {
     });
   });
 
-
   it("should apply custom props style objects", () => {
     const grid = (
       <Grid>
@@ -637,5 +641,40 @@ describe("components/grid", () => {
     const cells = resolveCells(grid.props);
     expect(cells).to.have.deep.property("[0].props.style.backgroundColor", "blue");
     expect(cells).to.have.deep.property("[0].props.style.padding", "1rem");
+  });
+
+  // This test needs deep rendering to inspect resolved styles
+  it("should allow style prop overrides on both the grid and cells", () => {
+    const grid = (
+      <StyleRoot>
+        <Grid style={{minWidth: "50%"}}>
+          <Cell style=
+            {[
+              {backgroundColor: "blue"},
+              {padding: "1rem"}
+            ]}
+          >
+            <p>testing</p>
+          </Cell>
+          <Cell>
+            <p>testing!</p>
+          </Cell>
+          <Cell>
+            <p>testing?</p>
+          </Cell>
+        </Grid>
+      </StyleRoot>
+    );
+    const element = TestUtils.renderIntoDocument(grid);
+    const gridNode = ReactDOM.findDOMNode(element);
+    const styles = gridNode.firstChild.attributes.style.value;
+
+    expect(styles).to.have.string("display:flex");
+    expect(styles).to.have.string("flex-direction:row;");
+    expect(styles).to.have.string("flex-wrap:wrap;");
+    expect(styles).to.have.string("justify-content:space-between;");
+
+    expect(styles).to.have.string("min-width:50%");
+    expect(styles).not.to.have.string("min-width:100%");
   });
 });

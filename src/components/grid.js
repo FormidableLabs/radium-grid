@@ -5,12 +5,12 @@ import resolveCells from "./util/resolve-cells";
 
 const Grid = (props) => {
   const styles = {
-    ...props.style,
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    minWidth: "100%"
+    minWidth: "100%",
+    ...props.style
   };
 
   return (
