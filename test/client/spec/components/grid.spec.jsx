@@ -5,7 +5,7 @@ require("babel-polyfill");
 
 import React from "react";
 import ReactDOM from "react-dom";
-import Radium, { StyleRoot } from "radium";
+import { StyleRoot } from "radium";
 import TestUtils from "react-addons-test-utils";
 import { Grid, Cell } from "../../../../src/index";
 import resolveCells from "../../../../src/components/util/resolve-cells";
