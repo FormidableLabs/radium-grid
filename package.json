@@ -1,6 +1,6 @@
 {
   "name": "radium-grid",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Radium grid component",
   "main": "lib/index.js",
   "repository": {
