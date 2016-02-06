@@ -1,5 +1,5 @@
 const analyzeInput = (string) => {
-  const [n, d] =  string.split("/");
+  const [n, d] = string.split("/");
   const numerator = parseInt(n, 10);
   const denominator = parseInt(d, 10);
   const zeroIndex = 0;
@@ -14,7 +14,7 @@ const analyzeInput = (string) => {
   }
 
   if ((!numerator && isNaN(numerator)) || (!denominator && isNaN(denominator))) {
-    if (numerator !== 1) { 
+    if (numerator !== 1) {
       throw new Error("Your fraction is missing a numerator or denominator.");
     }
   }
