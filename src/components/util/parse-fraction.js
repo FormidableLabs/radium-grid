@@ -3,10 +3,10 @@ const parseFraction = (string) => {
   const numerator = parseInt(n, 10);
   const denominator = parseInt(d, 10);
 
-  if(string.indexOf(" ") > -1){
+  if (string.indexOf(" ") > -1) {
     throw new Error("Your fraction must not contain any spaces.");
   }
-  if (numerator === 1 && (!denominator && isNaN(denominator)) ) {
+  if (numerator === 1 && (!denominator && isNaN(denominator))) {
     return numerator;
   }
 
