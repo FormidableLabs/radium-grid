@@ -37,7 +37,7 @@ describe("parse-fraction utility", () => {
 
     expect(errThrown).to.be.true;
   });
- 
+
   it("should throw a error when zero is provided as a denominator", () => {
     expect(errorCatcher(() => {
       parseFraction("2/0");
