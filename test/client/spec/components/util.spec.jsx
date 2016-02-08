@@ -4,52 +4,34 @@ require("babel-polyfill");
 
 import parseFraction from "../../../../src/components/util/parse-fraction";
 
-describe("parse-fraction utility", () => {
-  const errorCatcher = (cb) => {
-    let thrown = false;
-    try {
-      cb();
-    } catch (e) {
-      thrown = e.toString();
-    }
-    return thrown;
-  };
-
+describe("Fraction parser", () => {
   it("should return the integer 1 if the string '1' or if a whole fraction is provided", () => {
     expect(parseFraction("1")).to.equal(1);
     expect(parseFraction("1/1")).to.equal(1);
     expect(parseFraction("20/20")).to.equal(1);
   });
 
-  it("should throw an error when improper fractions are provided", () => {
-    expect(errorCatcher(() => {
-      parseFraction("4/1");
-    })).to.equal("Error: Your fraction must be less than or equal to 1.");
+  it("should not allow improper fractions", () => {
+    expect(parseFraction.bind(null, "4/1")).to.throw(Error);
   });
 
-  it("should throw an error when spaces are included in the input", () => {
-    const spaces = ["1 ", "1 1/2", "1/ 4", "1/3 "];
-    const errThrown = spaces.every((str) => {
-      return errorCatcher(() => {
-        parseFraction(str);
-      }) === "Error: Your fraction must not contain any spaces.";
-    });
-
-    expect(errThrown).to.be.true;
+  it("should allow spaces in otherwise valid input", () => {
+    expect(parseFraction("1 ")).to.equal(1);
+    expect(parseFraction(" 1  ")).to.equal(1);
+    expect(parseFraction("1/ 4")).to.equal(1 / 4);
+    expect(parseFraction("1/3 ")).to.equal(1 / 3);
+    expect(parseFraction.bind(null, "1 1/2")).to.throw(Error);
   });
 
-  it("should throw a error when zero is provided as a denominator", () => {
-    expect(errorCatcher(() => {
-      parseFraction("2/0");
-    })).to.equal("Error: The fraction you provided divides by zero.");
+  it("should not allow division by zero", () => {
+    expect(parseFraction.bind(null, "2/0")).to.throw(Error);
   });
 
-  it("should take fractions and return the corresponding floating point numbers <= int 1", () => {
+  it("should convert fraction strings into decimals", () => {
     expect(parseFraction("1/2")).to.equal((1 / 2));
     expect(parseFraction("1/3")).to.equal((1 / 3));
     expect(parseFraction("12/12")).to.equal((12 / 12));
     expect(parseFraction("1/6")).to.equal((1 / 6));
     expect(parseFraction("1/6")).to.equal((1 / 6));
   });
-
 });

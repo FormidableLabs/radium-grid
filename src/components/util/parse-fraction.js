@@ -1,22 +1,17 @@
-const analyzeInput = (string) => {
-  const [n, d] = string.split("/");
-  const numerator = parseInt(n, 10);
-  const denominator = parseInt(d, 10);
-  const zeroIndex = 0;
+const validateFraction = (fraction) => {
+  const [n, d] = fraction;
+
+  // Remove all whitespace and parse numbers
+  const numerator = parseInt(n.replace(/\s/g, ""), 10);
+  const denominator = parseInt(d.replace(/\s/g, ""), 10);
   const result = numerator / denominator;
 
-  if (string.indexOf(" ") >= zeroIndex) {
-    throw new Error("Your fraction must not contain any spaces.");
-  }
-
   if (denominator === 0) {
-    throw new Error("The fraction you provided divides by zero.");
+    throw new Error("Your fraction divides by zero.");
   }
 
-  if ((!numerator && isNaN(numerator)) || (!denominator && isNaN(denominator))) {
-    if (numerator !== 1) {
-      throw new Error("Your fraction is missing a numerator or denominator.");
-    }
+  if (!numerator || !denominator) {
+    throw new Error("Your fraction is missing a numerator or denominator.");
   }
 
   if (result > 1) {
@@ -27,15 +22,14 @@ const analyzeInput = (string) => {
 };
 
 const parseFraction = (string) => {
-  const [numerator, denominator] = analyzeInput(string);
-
-  if (numerator === 1 && (!denominator && isNaN(denominator))) {
-    return numerator;
-  }
-
-  if (numerator === denominator) {
+  if (string.trim() === "1") {
     return 1;
   }
+
+  const [rawNumerator, rawDenominator] = string.split("/");
+  const [numerator, denominator] = validateFraction([
+    rawNumerator, rawDenominator
+  ]);
 
   return numerator / denominator;
 };
