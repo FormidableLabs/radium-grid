@@ -10,7 +10,7 @@ import TestUtils from "react-addons-test-utils";
 import { Grid, Cell } from "../../../../src/index";
 import resolveCells from "../../../../src/components/util/resolve-cells";
 
-describe("components/grid", () => {
+describe("Grid", () => {
   const extractMediaQueries = (childProps) => {
     return childProps.map((props) => {
       return Object.keys(props).filter(
