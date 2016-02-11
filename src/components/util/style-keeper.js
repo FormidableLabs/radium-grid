@@ -9,7 +9,7 @@ export default class GridStyleKeeper extends StyleKeeper {
   }
 
   addCSS(css: string): {remove: () => void} {
-    const cascade = css.indexOf("[CASCADE]") !== -1;
+    const cascade = css.indexOf("[CASCADE]") !== -1; // eslint-disable-line no-magic-numbers
     if (cascade) {
       const cleanRule = css.replace(/\[CASCADE\]/g, "");
       if (!contains(this._cascadingCSS, cleanRule)) {
