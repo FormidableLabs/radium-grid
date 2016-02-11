@@ -1,7 +1,6 @@
 /* eslint-disable new-cap */
 import Enhancer from "radium/lib/enhancer";
 import StyleRoot from "radium/lib/components/style-root";
-// import StyleSheet from "radium/lib/style-sheet";
 
 import StyleKeeper from "./util/style-keeper";
 
