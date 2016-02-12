@@ -192,3 +192,8 @@ There are more complex examples on the demo page. Check out the code in [app.jsx
 - Install builder: `npm install -g builder`
 - Clone this repo
 - `npm install` and then `builder run hot` will load a webpack dev server at localhost:3000
+
+## Gotchas
+`<Grid />` only accepts `<Cell />`s as children, since inserting arbitrary children can break the layout. Two options for custom children are:
+- Wrap the children in a `<Cell />`.
+- Move the children to a sibling of `<Grid>`.
