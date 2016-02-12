@@ -1,3 +1,4 @@
+/* eslint-env browser */
 /* eslint-disable new-cap */
 
 // Help PhantomJS out
@@ -5,9 +6,9 @@ require("babel-polyfill");
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { StyleRoot } from "radium";
+import Radium from "radium";
 import TestUtils from "react-addons-test-utils";
-import { Grid, Cell } from "../../../../src/index";
+import { StyleRoot, Grid, Cell } from "../../../../src/index";
 import resolveCells from "../../../../src/components/util/resolve-cells";
 
 describe("Grid", () => {
@@ -676,6 +677,54 @@ describe("Grid", () => {
 
     expect(styles).to.have.string("min-width:50%");
     expect(styles).not.to.have.string("min-width:100%");
+  });
+
+  // We actually render to the DOM here so getComputedStyle will work :O
+  it("should respect the media query order of vanilla Radium components", () => {
+    const matchMedia = () => ({
+      addListener: () => {},
+      matches: true
+    });
+
+    const VanillaRadiumComponent = Radium({matchMedia})(() =>
+      <div style= // eslint-disable-line react/jsx-key
+        {[
+          {
+            "@media (min-width: 10px)": {background: "green"},
+            "@media (min-width: 20px)": {color: "blue"}
+          },
+          {
+            "@media (min-width: 10px)": {color: "white"}
+          }
+        ]}
+      >
+        <p>Nothing to see here</p>
+      </div>
+    );
+
+    const grid = (
+      <StyleRoot>
+        <Grid>
+          <Cell>
+            <VanillaRadiumComponent />
+          </Cell>
+          <Cell>
+            <p>testing!</p>
+          </Cell>
+          <Cell>
+            <p>testing?</p>
+          </Cell>
+        </Grid>
+      </StyleRoot>
+    );
+    const root = document.createElement("div");
+    document.body.appendChild(root);
+    ReactDOM.render(grid, root);
+    const color = window.getComputedStyle(
+      root.firstChild.firstChild.firstChild.firstChild
+    ).getPropertyValue("color");
+
+    expect(color).to.equal("rgb(255, 255, 255)");
   });
 
   // Regression: don't obliterate custom styles

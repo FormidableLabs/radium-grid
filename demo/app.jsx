@@ -2,8 +2,8 @@
 /* eslint-disable new-cap */
 import React from "react";
 import ReactDOM from "react-dom";
-import Radium, { Style, StyleRoot } from "radium";
-import { Grid, Cell } from "../src/index";
+import { Style } from "radium";
+import { StyleRoot, Grid, Cell } from "../src/index";
 
 const colors = {
   formidared: "#FF4136",
@@ -224,6 +224,4 @@ App.styles = {
   }
 };
 
-const Wrapper = Radium(App);
-
-ReactDOM.render(<Wrapper/>, document.getElementById("content"));
+ReactDOM.render(<App />, document.getElementById("content"));

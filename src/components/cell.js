@@ -1,6 +1,7 @@
 /* eslint-disable new-cap */
 import React, { PropTypes } from "react";
 import Radium from "radium";
+import resolveSortedMediaQueries from "./plugins/resolve-sorted-media-queries";
 
 const Cell = (props) => {
   return (
@@ -39,4 +40,15 @@ Cell.propTypes = {
   style: PropTypes.object
 };
 
-export default Radium(Cell);
+export default Radium({
+  plugins: [
+    Radium.Plugins.mergeStyleArray,
+    Radium.Plugins.checkProps,
+    resolveSortedMediaQueries,
+    Radium.Plugins.resolveInteractionStyles,
+    Radium.Plugins.keyframes,
+    Radium.Plugins.visited,
+    Radium.Plugins.prefix,
+    Radium.Plugins.checkProps
+  ]
+})(Cell);

@@ -2,6 +2,7 @@
 import React, { PropTypes } from "react";
 import Radium from "radium";
 import resolveCells from "./util/resolve-cells";
+import resolveSortedMediaQueries from "./plugins/resolve-sorted-media-queries";
 
 const Grid = (props) => {
   const styles = {
@@ -61,12 +62,23 @@ Grid.defaultProps = {
 
   breakpoints: {
     small: "@media only screen and (max-width: 640px)",
-    medium: "@media only screen and (min-width: 641px) and (max-width: 1024px)",
-    large: "@media only screen and (min-width: 1025px) and (max-width: 1440px)",
+    medium: "@media only screen and (min-width: 641px)",
+    large: "@media only screen and (min-width: 1025px)",
     xlarge: "@media only screen and (min-width: 1441px)"
   },
 
   gutter: "16px"
 };
 
-export default Radium(Grid);
+export default Radium({
+  plugins: [
+    Radium.Plugins.mergeStyleArray,
+    Radium.Plugins.checkProps,
+    resolveSortedMediaQueries,
+    Radium.Plugins.resolveInteractionStyles,
+    Radium.Plugins.keyframes,
+    Radium.Plugins.visited,
+    Radium.Plugins.prefix,
+    Radium.Plugins.checkProps
+  ]
+})(Grid);
