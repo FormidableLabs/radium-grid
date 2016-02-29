@@ -30,7 +30,7 @@
     "react-dom": "^0.14.6"
   },
   "devDependencies": {
-    "babel-polyfill": "^6.5.0",
+    "babel-polyfill": "^6.6.0",
     "babel-preset-es2015": "^6.5.0",
     "babel-register": "^6.5.1",
     "builder": "^2.6.0",
