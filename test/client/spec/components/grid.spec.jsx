@@ -1,4 +1,4 @@
-/* eslint-disable new-cap */
+/* eslint-disable new-cap,max-statements,no-unused-expressions*/
 
 // Help PhantomJS out
 require("babel-polyfill");
