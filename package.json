@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "builder": "^2.8.0",
-    "builder-radium-component": "^0.2.7",
+    "builder-radium-component": "^1.0.1",
     "coveralls": "^2.11.8",
     "lodash.initial": "^4.0.1",
     "lodash.last": "^3.0.0",
