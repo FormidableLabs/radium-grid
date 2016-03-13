@@ -553,6 +553,44 @@ describe("Grid", () => {
     });
   });
 
+  it("should allow overridable individual cell breakpoint order", () => {
+    const grid = (
+      <Grid>
+        <Cell>
+          <p>testing</p>
+        </Cell>
+        <Cell
+          smallOrder={1}
+          mediumOrder={2}
+          largeOrder={3}
+          xlargeOrder={4}
+        >
+          <p>testing!</p>
+        </Cell>
+        <Cell>
+          <p>testing?</p>
+        </Cell>
+      </Grid>
+    );
+    const cells = resolveCells(grid.props);
+
+    testCellsOneBreakpoint([cells[1]], "small", (style) => {
+      expect(style.order).to.deep.equal(1);
+    });
+
+    testCellsOneBreakpoint([cells[1]], "medium", (style) => {
+      expect(style.order).to.deep.equal(2);
+    });
+
+    testCellsOneBreakpoint([cells[1]], "large", (style) => {
+      expect(style.order).to.deep.equal(3);
+    });
+
+    testCellsOneBreakpoint([cells[1]], "xlarge", (style) => {
+      expect(style.order).to.deep.equal(4);
+    });
+  });
+
 
   it("should allow customizable fixed gutters", () => {
     const grid = (

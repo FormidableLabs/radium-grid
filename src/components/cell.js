@@ -16,24 +16,27 @@ Cell.propTypes = {
   width: PropTypes.string,
   horizontalAlign: horizontalPropType,
   verticalAlign: verticalPropType,
+  order: PropTypes.number,
 
   smallWidth: PropTypes.string,
   smallHorizontalAlign: horizontalPropType,
   smallVerticalAlign: verticalPropType,
+  smallOrder: PropTypes.number,
 
   mediumWidth: PropTypes.string,
   mediumHorizontalAlign: horizontalPropType,
   mediumVerticalAlign: verticalPropType,
+  mediumOrder: PropTypes.number,
 
   largeWidth: PropTypes.string,
   largeHorizontalAlign: horizontalPropType,
   largeVerticalAlign: verticalPropType,
+  largeOrder: PropTypes.number,
 
   xlargeWidth: PropTypes.string,
   xlargeHorizontalAlign: horizontalPropType,
   xlargeVerticalAlign: verticalPropType,
-
-  order: PropTypes.number,
+  xlargeOrder: PropTypes.number,
 
   children: PropTypes.node,
   style: PropTypes.object
