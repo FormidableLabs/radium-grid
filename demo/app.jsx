@@ -153,6 +153,43 @@ const App = () => {
         </Cell>
       </Grid>
 
+      <h2>Custom cell order per breakpoint</h2>
+      <Grid cellWidth="1/2">
+        <Cell
+          smallOrder={4}
+          mediumOrder={3}
+          largeOrder={2}
+          xlargeOrder={1}
+          style={[styles.cell, styles.redCell]}
+        >
+          <p style={styles.cellText}>1) Lorem</p>
+        </Cell>
+        <Cell
+          smallOrder={3}
+          mediumOrder={2}
+          largeOrder={1}
+          xlargeOrder={4}
+          style={[styles.cell, styles.darkRedCell]}>
+          <p style={styles.cellText}>2) ipsum</p>
+        </Cell>
+        <Cell
+          smallOrder={2}
+          mediumOrder={1}
+          largeOrder={4}
+          xlargeOrder={3}
+          style={[styles.cell, styles.blackCell]}>
+          <p style={styles.cellText}>3) dolor</p>
+        </Cell>
+        <Cell
+          smallOrder={1}
+          mediumOrder={4}
+          largeOrder={3}
+          xlargeOrder={2}
+          style={[styles.cell, styles.redCell]}>
+          <p style={styles.cellText}>4) sit</p>
+        </Cell>
+      </Grid>
+
       <h2>Nested grids</h2>
       <Grid cellWidth="1/2">
         <Cell style={[styles.cell, styles.fluidCell, styles.redCell]}>
