@@ -169,7 +169,8 @@ const App = () => {
           mediumOrder={2}
           largeOrder={1}
           xlargeOrder={4}
-          style={[styles.cell, styles.darkRedCell]}>
+          style={[styles.cell, styles.darkRedCell]}
+        >
           <p style={styles.cellText}>2) ipsum</p>
         </Cell>
         <Cell
@@ -177,7 +178,8 @@ const App = () => {
           mediumOrder={1}
           largeOrder={4}
           xlargeOrder={3}
-          style={[styles.cell, styles.blackCell]}>
+          style={[styles.cell, styles.blackCell]}
+        >
           <p style={styles.cellText}>3) dolor</p>
         </Cell>
         <Cell
@@ -185,7 +187,8 @@ const App = () => {
           mediumOrder={4}
           largeOrder={3}
           xlargeOrder={2}
-          style={[styles.cell, styles.redCell]}>
+          style={[styles.cell, styles.redCell]}
+        >
           <p style={styles.cellText}>4) sit</p>
         </Cell>
       </Grid>
