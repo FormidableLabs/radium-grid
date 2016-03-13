@@ -30,7 +30,8 @@ const resolveCellDefaults = (props) => {
       cellBreakpointDefault: {
         width: props[`${size}Width`],
         horizontalAlign: props[`${size}Align`],
-        verticalAlign: props[`${size}VerticalAlign`]
+        verticalAlign: props[`${size}VerticalAlign`],
+        order: props[`${size}Order`]
       }
     };
   });
