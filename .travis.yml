@@ -13,6 +13,9 @@ branches:
   only:
     - master
 
+addons:
+  firefox: "latest"
+
 before_install:
   # GUI for real browsers.
   - export DISPLAY=:99.0
