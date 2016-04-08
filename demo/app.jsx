@@ -237,7 +237,7 @@ App.styles = {
   cell: {
     marginBottom: "1rem",
     padding: "1rem",
-    minWidth: "0",
+    minWidth: "0px",
     height: "150px"
   },
   fluidCell: {
