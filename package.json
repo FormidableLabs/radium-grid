@@ -38,7 +38,7 @@
     "react": "^15.0.0",
     "react-addons-test-utils": "^15.0.0",
     "react-dom": "^15.0.0",
-    "sinon": "^1.17.2",
+    "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",
     "webpack-dev-server": "^1.14.1"
   },
