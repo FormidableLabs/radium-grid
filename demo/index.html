@@ -49,8 +49,9 @@
     // Sanity-check the component loaded...
     setTimeout(function () {
       var content = document.querySelector("#content");
-      content.innerHTML = content.innerHTML ||
-        "If you can see this, something is broken (or JS is not enabled)!";
+      if (!content.innerHTML) {
+        content.innerHTML = "If you can see this, something is broken (or JS is not enabled)!";
+      }
     }, 500);
   </script>
 </body>
