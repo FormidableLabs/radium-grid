@@ -19,7 +19,7 @@
     "test": "builder run npm:test"
   },
   "dependencies": {
-    "builder": "^2.9.1",
+    "builder": "^3.1.0",
     "builder-radium-component": "2.1.0",
     "coveralls": "^2.11.8",
     "lodash.initial": "^4.0.4",
