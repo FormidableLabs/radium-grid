@@ -1,6 +1,6 @@
 {
   "name": "radium-grid",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Radium grid component",
   "main": "lib/index.js",
   "repository": {
@@ -42,7 +42,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "peerDependencies": {
-    "radium": "^0.17.1",
+    "radium": "^0.18.1",
     "react": "^0.14.0 || ^15.0.0-0",
     "react-dom": "^0.14.0 || ^15.0.0-0"
   },
