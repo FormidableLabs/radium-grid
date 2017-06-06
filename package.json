@@ -23,7 +23,8 @@
     "coveralls": "^2.11.14",
     "lodash.initial": "^4.1.1",
     "lodash.last": "^3.0.0",
-    "lodash.merge": "^4.6.0"
+    "lodash.merge": "^4.6.0",
+    "prop-types": "^15.5.10"
   },
   "devDependencies": {
     "babel-polyfill": "^6.16.0",
@@ -42,7 +43,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "peerDependencies": {
-    "radium": "^0.18.1",
+    "radium": "^0.18.1 || ^0.19.0",
     "react": "^0.14.0 || ^15.0.0-0",
     "react-dom": "^0.14.0 || ^15.0.0-0"
   },
