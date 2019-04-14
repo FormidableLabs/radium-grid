@@ -1,10 +1,7 @@
-# Radium Grid [![Build Status](https://travis-ci.org/FormidableLabs/radium-grid.svg?branch=master)](https://travis-ci.org/FormidableLabs/radium-grid) [![Coverage Status](https://coveralls.io/repos/github/FormidableLabs/radium-grid/badge.svg?branch=master)](https://coveralls.io/github/FormidableLabs/radium-grid?branch=master)
+# Radium Grid [![Build Status](https://travis-ci.org/FormidableLabs/radium-grid.svg?branch=master)](https://travis-ci.org/FormidableLabs/radium-grid) [![Coverage Status](https://coveralls.io/repos/github/FormidableLabs/radium-grid/badge.svg?branch=master)](https://coveralls.io/github/FormidableLabs/radium-grid?branch=master) [![Maintenance Status][maintenance-image]](#maintenance-status)
+
 
 Radium Grid is a powerful, no-fuss grid system component for React. It combines the best decisions from the ecosystem of (S)CSS-based grid systems and implements them hack-free on top of Flexbox.
-
-### Maintenance Status: Archived
-
-This project is no longer maintained by Formidable. We are no longer responding to issues or pull requests unless they relate to security concerns. We encourage interested developers to fork this project and make it their own!
 
 ## What makes Radium Grid special?
 - Declarative layout using JSX.
@@ -201,3 +198,10 @@ There are more complex examples on the demo page. Check out the code in [app.jsx
 `<Grid />` only accepts `<Cell />`s as children, since inserting arbitrary children can break the layout. Two options for custom children are:
 - Wrap the children in a `<Cell />`.
 - Move the children to a sibling of `<Grid>`.
+
+
+## Maintenance Status
+
+**Archived:** This project is no longer maintained by Formidable. We are no longer responding to issues or pull requests unless they relate to security concerns. We encourage interested developers to fork this project and make it their own!
+
+[maintenance-image]: https://img.shields.io/badge/maintenance-archived-red.svg
