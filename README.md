@@ -2,6 +2,10 @@
 
 Radium Grid is a powerful, no-fuss grid system component for React. It combines the best decisions from the ecosystem of (S)CSS-based grid systems and implements them hack-free on top of Flexbox.
 
+### Maintenance Status: Archived
+
+This project is no longer maintained by Formidable. We are no longer responding to issues or pull requests unless they relate to security concerns. We encourage interested developers to fork this project and make it their own!
+
 ## What makes Radium Grid special?
 - Declarative layout using JSX.
 - Sensible defaults.
