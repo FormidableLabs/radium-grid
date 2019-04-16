@@ -33,6 +33,7 @@
     "builder-radium-component-dev": "^2.1.2",
     "chai": "^3.2.0",
     "mocha": "^3.1.2",
+    "prop-types": "^15.5.10",
     "radium": "^0.18.1",
     "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
